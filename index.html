@@ -32,7 +32,7 @@ nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-f
 </section>
 
 <section id="analyzer" class="wrap">
-<div class="section-head"><h2>AI Waste Analysis Assistant</h2><p>Describe an item or upload an image to test the prototype. Image upload provides a local preview; classification remains a prototype/demo response unless a real vision model is connected.</p></div>
+<div class="section-head"><h2>AI Waste Analysis Assistant</h2><p>Describe an item or upload an image for AI-powered classification, safety guidance and disposal recommendations. Image analysis requires the secure backend API configuration described in the project README.</p></div>
 <div class="analyzer">
 <div class="an-head"><div><div style="color:#6ee7b7;font-weight:800;font-size:12px">MULTI-MODAL INPUT</div><h3 style="margin:7px 0 0;font-size:24px">Input Waste Item Details</h3></div>
 <div class="tabs"><button id="textTab" class="active" onclick="switchMode('text')">Text Description</button><button id="imageTab" onclick="switchMode('image')">Image Upload</button></div></div>
@@ -86,6 +86,7 @@ nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-f
 
 <script>
 let selectedImageFile=null;
+const ECOSORT_API_URL = window.ECOSORT_API_URL || ""; // Set to your deployed /api/analyze endpoint.
 const data={
 "plastic bottle":{category:"Plastic / Recyclable",reason:"Common plastic container; exact recyclability depends on local collection rules.",recommendation:"Empty and clean it, then use the local plastic/recycling stream if accepted.",safety:"No special hazard identified in the prototype."},
 "banana peel":{category:"Organic Waste",reason:"Biodegradable food/plant material.",recommendation:"Use the local organic-waste or composting stream where available.",safety:"Avoid mixing with non-organic waste."},
@@ -101,7 +102,70 @@ const data={
 function switchMode(mode){document.getElementById("textMode").classList.toggle("hidden",mode!=="text");document.getElementById("imageMode").classList.toggle("hidden",mode!=="image");document.getElementById("textTab").classList.toggle("active",mode==="text");document.getElementById("imageTab").classList.toggle("active",mode==="image")}
 function usePreset(name){switchMode("text");document.getElementById("wasteInput").value=name;analyze()}
 function classify(text){let t=text.toLowerCase();for(const k in data){if(t.includes(k))return data[k]}if(t.includes("charger")||t.includes("phone")||t.includes("laptop")||t.includes("electronic"))return data["old phone"];if(t.includes("peel")||t.includes("vegetable")||t.includes("compost"))return data["banana peel"];if(t.includes("paper")||t.includes("carton"))return data["newspaper"];if(t.includes("plastic"))return data["plastic bottle"];return {category:"General Waste",reason:"The prototype could not match the description to a more specific preset category.",recommendation:"Check local waste guidance or provide a more specific description.",safety:"If the item may be hazardous, do not handle it without appropriate guidance."}}
-function analyze(){let mode=document.getElementById("imageMode").classList.contains("hidden")?"text":"image";let item="";if(mode==="text"){item=document.getElementById("wasteInput").value.trim();if(!item){showMessage("Please enter a waste item first.");return}}else{if(!selectedImageFile){showMessage("Please upload an image first.");return}item=selectedImageFile.name}let r=classify(item);let imageNote=mode==="image"?"Image preview is processed locally in the browser. This academic prototype does not claim real computer-vision recognition unless a vision model is connected.":"Text-based prototype analysis.";document.getElementById("result").classList.remove("hidden");document.getElementById("result").innerHTML='<div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap"><h3 style="margin:0">AI Analysis Result</h3><span class="tag">Prototype / Demo</span></div><div class="result-grid" style="margin-top:15px"><div class="result-item">Detected Item<b>'+escapeHtml(item)+'</b></div><div class="result-item">Category<b>'+escapeHtml(r.category)+'</b></div><div class="result-item">Safety<b>'+escapeHtml(r.safety)+'</b></div></div><div class="card" style="margin-top:14px;box-shadow:none"><b>Why?</b><p>'+escapeHtml(r.reason)+'</p><b>Disposal Recommendation</b><p>'+escapeHtml(r.recommendation)+'</p><p class="note">'+escapeHtml(imageNote)+' Always verify local rules for real disposal decisions.</p></div>';document.getElementById("result").scrollIntoView({behavior:"smooth",block:"nearest"})}
+async function analyze(){
+  let mode=document.getElementById("imageMode").classList.contains("hidden")?"text":"image";
+  let item="";
+  if(mode==="text"){
+    item=document.getElementById("wasteInput").value.trim();
+    if(!item){showMessage("Please enter a waste item first.");return}
+  }else{
+    if(!selectedImageFile){showMessage("Please upload an image first.");return}
+    item=selectedImageFile.name;
+  }
+
+  if(ECOSORT_API_URL){
+    const btn=document.querySelector("#textMode .btn, #imageMode .btn");
+    const oldText=btn?btn.textContent:"Analyze with AI";
+    if(btn){btn.disabled=true;btn.textContent="Analyzing...";}
+    try{
+      let imageData=null;
+      if(mode==="image"){
+        imageData=await fileToDataUrl(selectedImageFile);
+      }
+      const response=await fetch(ECOSORT_API_URL,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({item,mode,imageData})
+      });
+      const payload=await response.json().catch(()=>({}));
+      if(!response.ok) throw new Error(payload.error||"AI service returned an error.");
+      renderAIResult(payload,item,mode);
+      return;
+    }catch(err){
+      showMessage("AI service is temporarily unavailable. Please try again or use a text preset. Details: "+err.message);
+      return;
+    }finally{
+      if(btn){btn.disabled=false;btn.textContent=oldText;}
+    }
+  }
+
+  // Safe local prototype fallback when no API endpoint is configured.
+  let r=classify(item);
+  let imageNote=mode==="image"?"Image preview is processed locally in the browser. This academic prototype does not claim real computer-vision recognition unless a vision model is connected.":"Text-based prototype analysis.";
+  renderAIResult({
+    category:r.category,
+    reason:r.reason,
+    recommendation:r.recommendation,
+    safety:r.safety,
+    prototype:true,
+    note:imageNote
+  },item,mode);
+}
+function fileToDataUrl(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(reader.result);
+    reader.onerror=()=>reject(new Error("Could not read the image."));
+    reader.readAsDataURL(file);
+  });
+}
+function renderAIResult(r,item,mode){
+  const label=r.prototype?"Prototype / Demo":"AI Model";
+  const imageNote=r.note||(mode==="image"?"Image analyzed by the connected vision-capable AI model.":"Text analyzed by the connected AI model.");
+  document.getElementById("result").classList.remove("hidden");
+  document.getElementById("result").innerHTML='<div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap"><h3 style="margin:0">AI Analysis Result</h3><span class="tag">'+escapeHtml(label)+'</span></div><div class="result-grid" style="margin-top:15px"><div class="result-item">Detected Item<b>'+escapeHtml(item)+'</b></div><div class="result-item">Category<b>'+escapeHtml(r.category||"Not determined")+'</b></div><div class="result-item">Safety<b>'+escapeHtml(r.safety||"Check local guidance")+'</b></div></div><div class="card" style="margin-top:14px;box-shadow:none"><b>Why?</b><p>'+escapeHtml(r.reason||"No explanation returned.")+'</p><b>Disposal Recommendation</b><p>'+escapeHtml(r.recommendation||"Check local waste-management guidance.")+'</p><p class="note">'+escapeHtml(imageNote)+' Always verify local rules for real disposal decisions.</p></div>';
+  document.getElementById("result").scrollIntoView({behavior:"smooth",block:"nearest"});
+}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
 function showMessage(message){let box=document.getElementById("result");box.classList.remove("hidden");box.innerHTML='<div class="card" style="box-shadow:none"><b>Notice</b><p>'+escapeHtml(message)+'</p></div>'}
 function resetAnalyzer(){document.getElementById("wasteInput").value="";document.getElementById("fileInput").value="";selectedImageFile=null;document.getElementById("preview").removeAttribute("src");document.getElementById("preview").classList.add("hidden");document.getElementById("uploadPrompt").classList.remove("hidden");document.getElementById("result").classList.add("hidden");switchMode("text")}
