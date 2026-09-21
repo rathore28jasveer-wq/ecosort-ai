@@ -1,177 +1,1763 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EcoSort AI — Identify. Segregate. Sustain.</title>
-<meta name="description" content="EcoSort AI — AI-powered waste segregation and responsible disposal assistant.">
-<style>
-:root{--green:#10b981;--green2:#059669;--dark:#07111f;--card:#111b2d;--text:#e5eef7;--muted:#9fb0c5;--border:#26354a;--light:#f4f7fa}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Arial,sans-serif;color:#172033;background:var(--light)}
-a{text-decoration:none;color:inherit}.top{background:#0b1424;color:#cbd5e1;padding:8px 20px;font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.top b{color:#fff}.badge{color:#6ee7b7;border:1px solid #176b55;padding:4px 9px;border-radius:99px;font-weight:700}
-nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid #dce4ed;padding:14px 5%;display:flex;align-items:center;justify-content:space-between;gap:20px}.logo{display:flex;align-items:center;gap:10px}.logo-mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#059669,#34d399);display:grid;place-items:center;color:#fff;font-size:20px}.logo strong{font-size:21px}.logo strong span{color:var(--green2)}.logo small{display:block;color:#64748b;font-size:10px}.links{display:flex;gap:4px;align-items:center;flex-wrap:wrap}.links a{padding:9px 10px;border-radius:9px;color:#475569;font-size:14px}.links a:hover{background:#ecfdf5;color:#047857}.btn{border:0;border-radius:12px;padding:11px 17px;background:var(--green2);color:#fff;font-weight:800;cursor:pointer}.btn:hover{background:#047857}.hero{background:radial-gradient(circle at 20% 10%,#0b3b34 0,#07111f 35%,#050c16 100%);color:#fff;padding:70px 6%;text-align:center}.pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.pill{border:1px solid #18866a;color:#9af0d1;border-radius:99px;padding:7px 12px;font-size:12px;font-weight:700}.hero h1{font-size:clamp(38px,6vw,70px);margin:25px 0 15px;line-height:1.05}.hero h1 span{color:#5ee7bd}.hero p{max-width:800px;margin:0 auto 28px;color:#c8d5e3;font-size:18px;line-height:1.6}.hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.btn.alt{background:#ffffff14;border:1px solid #ffffff2b}.wrap{max-width:1180px;margin:auto;padding:65px 20px}.section-head{text-align:center;max-width:760px;margin:0 auto 35px}.section-head h2{font-size:34px;margin:8px 0}.section-head p{color:#64748b;line-height:1.6}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#fff;border:1px solid #dfe7ef;border-radius:18px;padding:24px;box-shadow:0 8px 25px #0f172a0a}.card h3{margin:0 0 9px}.card p,.card li{color:#5d6b7d;line-height:1.55;font-size:14px}.analyzer{background:#fff;border:1px solid #dce4ed;border-radius:24px;overflow:hidden;box-shadow:0 15px 45px #0f172a14}.an-head{background:#0e182a;color:#fff;padding:25px;display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}.tabs{display:flex;background:#1d2a3e;border:1px solid #314258;padding:4px;border-radius:12px}.tabs button{border:0;background:transparent;color:#cbd5e1;padding:10px 14px;border-radius:9px;font-weight:700;cursor:pointer}.tabs button.active{background:var(--green);color:#05251c}.an-body{padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:25px}.inputbox{width:100%;padding:14px;border:2px solid #d4dde7;border-radius:12px;font-size:15px;outline:none}.inputbox:focus{border-color:var(--green)}.upload{border:2px dashed #cbd5e1;border-radius:16px;min-height:190px;padding:20px;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;background:#f8fafc}.upload:hover{border-color:var(--green);background:#f0fdf8}.upload img{max-width:100%;max-height:170px;border-radius:12px}.hidden{display:none!important}.presets{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}.preset{border:1px solid #cbd5e1;background:#fff;border-radius:99px;padding:7px 11px;cursor:pointer;font-size:12px}.preset:hover{border-color:var(--green);color:#047857}.result{margin:0 28px 28px;background:#f8fafc;border:1px solid #dce4ed;border-radius:18px;padding:22px}.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.result-item{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:13px}.result-item b{display:block;margin-top:4px}.note{font-size:12px;color:#64748b;line-height:1.5}.tag{display:inline-block;padding:5px 9px;border-radius:99px;background:#d1fae5;color:#047857;font-weight:800;font-size:12px}.flow{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;font-weight:800}.flow span{background:#ecfdf5;color:#047857;border:1px solid #bbf7d0;padding:10px 13px;border-radius:10px}.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}.footer{background:#0b1424;color:#cbd5e1;text-align:center;padding:30px 20px}.small{font-size:12px;color:#94a3b8}
-@media(max-width:900px){.links{display:none}.grid,.an-body,.two{grid-template-columns:1fr}.result-grid{grid-template-columns:1fr}.hero{padding:50px 20px}}
-</style>
-</head>
-<body>
-<div class="top"><div><span class="badge">Academic Prototype</span> &nbsp; 1M1B AI for Sustainability Virtual Internship &nbsp; • &nbsp; IBM SkillsBuild &amp; AICTE</div><div>SDG 12 &amp; SDG 11 Aligned</div></div>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoSort AI — Identify. Segregate. Sustain.</title>
+  <meta name="description" content="AI-Powered Waste Segregation and Sustainability Assistant developed for the 1M1B Virtual Internship with IBM SkillsBuild and AICTE." />
 
-<nav>
-<a class="logo" href="#home"><div class="logo-mark">♻</div><div><strong>EcoSort<span>AI</span></strong><small>Identify. Segregate. Sustain.</small></div></a>
-<div class="links">
-<a href="#analyzer">AI Waste Analyzer</a><a href="#knowledge">Knowledge Base</a><a href="#dashboard">Eco Dashboard</a><a href="#responsible">Responsible AI</a><a href="#design">Design Thinking</a><a href="#about">About Project</a>
-</div>
-<a class="btn" href="#analyzer">Start Analyzing</a>
-</nav>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<section id="home" class="hero">
-<div class="pills"><span class="pill">Primary: UN SDG 12 — Responsible Consumption &amp; Production</span><span class="pill">Secondary: UN SDG 11 — Sustainable Cities &amp; Communities</span></div>
-<h1>Turn Waste Into <span>Better Choices</span></h1>
-<p>EcoSort AI helps people identify waste, understand its category, and explore responsible disposal options through an accessible AI-inspired prototype.</p>
-<div class="hero-actions"><a class="btn" href="#analyzer">Analyze Waste Now</a><a class="btn alt" href="#knowledge">Learn About Sustainability</a></div>
-</section>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-<section id="analyzer" class="wrap">
-<div class="section-head"><h2>AI Waste Analysis Assistant</h2><p>Describe an item or upload an image for AI-powered classification, safety guidance and disposal recommendations. Image analysis requires the secure backend API configuration described in the project README.</p></div>
-<div class="analyzer">
-<div class="an-head"><div><div style="color:#6ee7b7;font-weight:800;font-size:12px">MULTI-MODAL INPUT</div><h3 style="margin:7px 0 0;font-size:24px">Input Waste Item Details</h3></div>
-<div class="tabs"><button id="textTab" class="active" onclick="switchMode('text')">Text Description</button><button id="imageTab" onclick="switchMode('image')">Image Upload</button></div></div>
-<div class="an-body">
-<div>
-<div id="textMode"><label><b>Describe the item or ask a question:</b></label><input id="wasteInput" class="inputbox" style="margin-top:10px" placeholder="e.g. old mobile charger, banana peel, cardboard box"><div style="margin-top:12px"><button class="btn" onclick="analyze()">Analyze with AI</button><button class="preset" onclick="resetAnalyzer()" style="margin-left:8px">Reset</button></div></div>
-<div id="imageMode" class="hidden"><b>Upload Item Photo</b><div id="dropZone" class="upload" role="button" tabindex="0" aria-label="Upload waste image" style="margin-top:10px"><input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp" class="hidden"><div id="uploadPrompt"><div style="font-size:35px">📷</div><b>Click to upload or drag &amp; drop</b><div class="small">PNG, JPG or WEBP</div></div><img id="preview" class="hidden" alt="Uploaded waste preview"></div><div style="margin-top:12px"><button class="btn" onclick="analyze()">Analyze with AI</button><button class="preset" onclick="resetAnalyzer()" style="margin-left:8px">Reset</button></div></div>
-<div style="margin-top:25px"><b>Quick Test Presets</b><div class="presets"><button class="preset" onclick="usePreset('Plastic Bottle')">Plastic Bottle</button><button class="preset" onclick="usePreset('Banana Peel')">Banana Peel</button><button class="preset" onclick="usePreset('Cardboard Box')">Cardboard Box</button><button class="preset" onclick="usePreset('Old Mobile Charger')">Old Mobile Charger</button><button class="preset" onclick="usePreset('Battery')">Battery</button><button class="preset" onclick="usePreset('Newspaper')">Newspaper</button><button class="preset" onclick="usePreset('Food Leftovers')">Food Leftovers</button><button class="preset" onclick="usePreset('Aluminium Can')">Aluminium Can</button><button class="preset" onclick="usePreset('Broken Glass')">Broken Glass</button><button class="preset" onclick="usePreset('Old Phone')">Old Phone</button></div></div>
-</div>
-<div class="card" style="background:#f8fafc;box-shadow:none"><h3>AI Pipeline</h3><p>User Input → AI Analysis → Waste Classification → Disposal Guidance → Explanation → User Decision</p><div style="margin-top:20px"><span class="tag">Prototype / Demo</span></div><p class="note" style="margin-top:12px">Always check local waste-management rules and authorized disposal facilities for real-world decisions.</p></div>
-</div>
-<div id="result" class="result hidden"></div>
-</div>
-</section>
-
-<section id="knowledge" class="wrap" style="background:#eef5f2;max-width:none">
-<div class="section-head"><h2>Waste Knowledge Base</h2><p>Quick reference for common waste categories used in the prototype.</p></div>
-<div class="grid" style="max-width:1180px;margin:auto">
-<div class="card"><h3>♻️ Recyclable</h3><p>Paper, cardboard, clean metal cans and other materials accepted by a local recycling system.</p></div>
-<div class="card"><h3>🍌 Organic</h3><p>Food scraps, fruit and vegetable peels and other biodegradable material suitable for local organic-waste systems.</p></div>
-<div class="card"><h3>💻 E-Waste</h3><p>Electronic devices and accessories such as chargers, phones and certain batteries.</p></div>
-<div class="card"><h3>⚠️ Hazardous</h3><p>Items that may require special handling, including certain chemicals, batteries or contaminated materials.</p></div>
-<div class="card"><h3>🧴 Plastic</h3><p>Plastic packaging and containers whose disposal depends on material type and local collection rules.</p></div>
-<div class="card"><h3>🗑️ General Waste</h3><p>Residual waste that cannot be placed in available recycling or organic streams.</p></div>
-</div>
-</section>
-
-<section id="dashboard" class="wrap">
-<div class="section-head"><h2>Eco Dashboard</h2><p>Illustrative prototype dashboard — not real-world measured impact data.</p></div>
-<div class="grid"><div class="card"><h3>Waste Categories</h3><p>Recyclable • Organic • E-Waste • Plastic • Hazardous • General</p></div><div class="card"><h3>Prototype Goal</h3><p>Improve awareness and support informed waste-segregation decisions.</p></div><div class="card"><h3>Impact Measurement</h3><p>Future versions can collect validated usage and impact metrics after real-world testing.</p></div></div>
-</section>
-
-<section id="responsible" class="wrap" style="background:#eef5f2;max-width:none">
-<div class="section-head"><h2>Responsible AI Considerations</h2><p>EcoSort AI is designed as decision support, with clear limitations and human verification.</p></div>
-<div class="grid" style="max-width:1180px;margin:auto">
-<div class="card"><h3>⚖️ Fairness</h3><p>Provide useful guidance across different users and waste descriptions.</p></div><div class="card"><h3>🔍 Transparency</h3><p>Clearly communicate that prototype classifications are not guaranteed to be correct.</p></div><div class="card"><h3>🔐 Privacy</h3><p>Uploaded images are previewed locally in the browser and are not sent to a server by this prototype.</p></div><div class="card"><h3>🛡️ Safety</h3><p>Hazardous waste should be handled through appropriate official or authorized channels.</p></div><div class="card"><h3>👤 Human Verification</h3><p>Users should verify important disposal instructions with local authorities.</p></div><div class="card"><h3>⚠️ Limitations</h3><p>Text rules and image previews do not replace a trained real-world AI vision model or local regulations.</p></div>
-</div>
-</section>
-
-<section id="design" class="wrap">
-<div class="section-head"><h2>Design Thinking</h2><p>Human-centered approach used for the sustainability project.</p></div>
-<div class="flow"><span>Empathize</span>→<span>Define</span>→<span>Ideate</span>→<span>Prototype</span>→<span>Test &amp; Refine</span></div>
-</section>
-
-<section id="about" class="wrap" style="background:#eef5f2;max-width:none">
-<div class="section-head"><h2>About Project</h2><p>EcoSort AI is an academic sustainability prototype created for the 1M1B AI for Sustainability Virtual Internship in collaboration with IBM SkillsBuild &amp; AICTE.</p></div>
-<div class="two" style="max-width:900px;margin:auto"><div class="card"><h3>Project Focus</h3><p>AI + Waste Awareness + Responsible Disposal</p><p><b>Primary SDG:</b> SDG 12</p><p><b>Secondary SDG:</b> SDG 11</p></div><div class="card"><h3>Technology</h3><p>Responsive HTML/CSS/JavaScript prototype with client-side image preview and rule-based demo analysis.</p></div></div>
-</section>
-
-<footer class="footer"><strong>EcoSort AI</strong><p class="small">Jasveer Singh | BCA | 1M1B AI for Sustainability Virtual Internship</p><p class="small">IBM SkillsBuild &amp; AICTE</p></footer>
-
-<script>
-let selectedImageFile=null;
-const ECOSORT_API_URL = window.ECOSORT_API_URL || ""; // Set to your deployed /api/analyze endpoint.
-const data={
-"plastic bottle":{category:"Plastic / Recyclable",reason:"Common plastic container; exact recyclability depends on local collection rules.",recommendation:"Empty and clean it, then use the local plastic/recycling stream if accepted.",safety:"No special hazard identified in the prototype."},
-"banana peel":{category:"Organic Waste",reason:"Biodegradable food/plant material.",recommendation:"Use the local organic-waste or composting stream where available.",safety:"Avoid mixing with non-organic waste."},
-"cardboard box":{category:"Recyclable",reason:"Paper-based packaging is commonly recyclable when clean and dry.",recommendation:"Flatten and place in the local paper/cardboard recycling stream if accepted.",safety:"Keep dry and free from contamination."},
-"old mobile charger":{category:"E-Waste",reason:"Contains electrical and electronic components.",recommendation:"Use an authorized e-waste collection or recycling channel where available.",safety:"Do not place electronic accessories in ordinary organic waste."},
-"battery":{category:"Hazardous / E-Waste",reason:"Some batteries can contain reactive or hazardous materials.",recommendation:"Use a battery take-back or authorized hazardous/e-waste collection point.",safety:"Do not crush, puncture or burn batteries."},
-"newspaper":{category:"Recyclable",reason:"Paper material can commonly enter paper recycling when clean and dry.",recommendation:"Place in the local paper recycling stream if accepted.",safety:"Keep dry."},
-"food leftovers":{category:"Organic Waste",reason:"Food residue is biodegradable.",recommendation:"Use local organic-waste or composting collection where available.",safety:"Keep separate from hazardous materials."},
-"aluminium can":{category:"Recyclable",reason:"Aluminium is widely recyclable where collection exists.",recommendation:"Empty and place in the local metal/recycling stream if accepted.",safety:"Handle sharp edges carefully."},
-"broken glass":{category:"General / Special Handling",reason:"Broken glass can injure people and may not belong in standard recycling.",recommendation:"Follow local glass disposal guidance and package safely if required.",safety:"Avoid direct contact; use appropriate protective handling."},
-"old phone":{category:"E-Waste",reason:"Electronic device containing electrical components and a battery.",recommendation:"Use an authorized e-waste collection or take-back channel where available.",safety:"Do not dismantle a damaged battery yourself."}
-};
-function switchMode(mode){document.getElementById("textMode").classList.toggle("hidden",mode!=="text");document.getElementById("imageMode").classList.toggle("hidden",mode!=="image");document.getElementById("textTab").classList.toggle("active",mode==="text");document.getElementById("imageTab").classList.toggle("active",mode==="image")}
-function usePreset(name){switchMode("text");document.getElementById("wasteInput").value=name;analyze()}
-function classify(text){let t=text.toLowerCase();for(const k in data){if(t.includes(k))return data[k]}if(t.includes("charger")||t.includes("phone")||t.includes("laptop")||t.includes("electronic"))return data["old phone"];if(t.includes("peel")||t.includes("vegetable")||t.includes("compost"))return data["banana peel"];if(t.includes("paper")||t.includes("carton"))return data["newspaper"];if(t.includes("plastic"))return data["plastic bottle"];return {category:"General Waste",reason:"The prototype could not match the description to a more specific preset category.",recommendation:"Check local waste guidance or provide a more specific description.",safety:"If the item may be hazardous, do not handle it without appropriate guidance."}}
-async function analyze(){
-  let mode=document.getElementById("imageMode").classList.contains("hidden")?"text":"image";
-  let item="";
-  if(mode==="text"){
-    item=document.getElementById("wasteInput").value.trim();
-    if(!item){showMessage("Please enter a waste item first.");return}
-  }else{
-    if(!selectedImageFile){showMessage("Please upload an image first.");return}
-    item=selectedImageFile.name;
-  }
-
-  if(ECOSORT_API_URL){
-    const btn=document.querySelector("#textMode .btn, #imageMode .btn");
-    const oldText=btn?btn.textContent:"Analyze with AI";
-    if(btn){btn.disabled=true;btn.textContent="Analyzing...";}
-    try{
-      let imageData=null;
-      if(mode==="image"){
-        imageData=await fileToDataUrl(selectedImageFile);
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+              950: '#022c22',
+            }
+          }
+        }
       }
-      const response=await fetch(ECOSORT_API_URL,{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({item,mode,imageData})
-      });
-      const payload=await response.json().catch(()=>({}));
-      if(!response.ok) throw new Error(payload.error||"AI service returned an error.");
-      renderAIResult(payload,item,mode);
-      return;
-    }catch(err){
-      showMessage("AI service is temporarily unavailable. Please try again or use a text preset. Details: "+err.message);
-      return;
-    }finally{
-      if(btn){btn.disabled=false;btn.textContent=oldText;}
     }
-  }
+  </script>
 
-  // Safe local prototype fallback when no API endpoint is configured.
-  let r=classify(item);
-  let imageNote=mode==="image"?"Image preview is processed locally in the browser. This academic prototype does not claim real computer-vision recognition unless a vision model is connected.":"Text-based prototype analysis.";
-  renderAIResult({
-    category:r.category,
-    reason:r.reason,
-    recommendation:r.recommendation,
-    safety:r.safety,
-    prototype:true,
-    note:imageNote
-  },item,mode);
-}
-function fileToDataUrl(file){
-  return new Promise((resolve,reject)=>{
-    const reader=new FileReader();
-    reader.onload=()=>resolve(reader.result);
-    reader.onerror=()=>reject(new Error("Could not read the image."));
-    reader.readAsDataURL(file);
-  });
-}
-function renderAIResult(r,item,mode){
-  const label=r.prototype?"Prototype / Demo":"AI Model";
-  const imageNote=r.note||(mode==="image"?"Image analyzed by the connected vision-capable AI model.":"Text analyzed by the connected AI model.");
-  document.getElementById("result").classList.remove("hidden");
-  document.getElementById("result").innerHTML='<div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap"><h3 style="margin:0">AI Analysis Result</h3><span class="tag">'+escapeHtml(label)+'</span></div><div class="result-grid" style="margin-top:15px"><div class="result-item">Detected Item<b>'+escapeHtml(item)+'</b></div><div class="result-item">Category<b>'+escapeHtml(r.category||"Not determined")+'</b></div><div class="result-item">Safety<b>'+escapeHtml(r.safety||"Check local guidance")+'</b></div></div><div class="card" style="margin-top:14px;box-shadow:none"><b>Why?</b><p>'+escapeHtml(r.reason||"No explanation returned.")+'</p><b>Disposal Recommendation</b><p>'+escapeHtml(r.recommendation||"Check local waste-management guidance.")+'</p><p class="note">'+escapeHtml(imageNote)+' Always verify local rules for real disposal decisions.</p></div>';
-  document.getElementById("result").scrollIntoView({behavior:"smooth",block:"nearest"});
-}
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-function showMessage(message){let box=document.getElementById("result");box.classList.remove("hidden");box.innerHTML='<div class="card" style="box-shadow:none"><b>Notice</b><p>'+escapeHtml(message)+'</p></div>'}
-function resetAnalyzer(){document.getElementById("wasteInput").value="";document.getElementById("fileInput").value="";selectedImageFile=null;document.getElementById("preview").removeAttribute("src");document.getElementById("preview").classList.add("hidden");document.getElementById("uploadPrompt").classList.remove("hidden");document.getElementById("result").classList.add("hidden");switchMode("text")}
-function showImage(file){if(!file){return}if(!["image/png","image/jpeg","image/webp"].includes(file.type)){showMessage("Please select a PNG, JPG or WEBP image.");return}if(file.size>5*1024*1024){showMessage("Image is too large. Please choose an image up to 5 MB.");return}selectedImageFile=file;const reader=new FileReader();reader.onload=e=>{document.getElementById("preview").src=e.target.result;document.getElementById("preview").classList.remove("hidden");document.getElementById("uploadPrompt").classList.add("hidden")};reader.onerror=()=>showMessage("The image could not be read. Please try another image.");reader.readAsDataURL(file)}
-document.getElementById("fileInput").addEventListener("change",e=>showImage(e.target.files[0]));
-const dz=document.getElementById("dropZone");dz.addEventListener("click",()=>document.getElementById("fileInput").click());dz.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();document.getElementById("fileInput").click()}});dz.addEventListener("dragover",e=>{e.preventDefault();dz.style.borderColor="#10b981"});dz.addEventListener("dragleave",()=>dz.style.borderColor="#cbd5e1");dz.addEventListener("drop",e=>{e.preventDefault();const f=e.dataTransfer.files[0];showImage(f);dz.style.borderColor="#cbd5e1"});
-</script>
+  <style>
+    /* Custom utility scrollbars and animations */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.03); }
+    }
+    .glow-effect {
+      animation: pulseGlow 4s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col selection:bg-brand-200 selection:text-brand-900">
+
+  <!-- Top Internship Credentials Bar -->
+  <aside class="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-800 z-50 sticky top-0">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-brand-900/80 text-brand-300 border border-brand-700">
+          Academic Prototype
+        </span>
+        <span class="font-medium text-slate-200">
+          1M1B AI for Sustainability Virtual Internship
+        </span>
+        <span class="hidden md:inline text-slate-600">•</span>
+        <span class="hidden md:inline text-slate-400">
+          In Collaboration with <strong class="text-white font-semibold">IBM SkillsBuild</strong> &amp; <strong class="text-white font-semibold">AICTE</strong>
+        </span>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3 text-[11px]">
+        <span class="inline-flex items-center gap-1 text-emerald-400 font-medium">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          SDG 12 &amp; SDG 11 Aligned
+        </span>
+        <button onclick="openModal('readme-modal')" class="hover:text-white bg-slate-800 px-2.5 py-1 rounded text-slate-300 border border-slate-700 flex items-center gap-1 transition">
+          <i data-lucide="file-code" class="w-3 h-3 text-brand-400"></i>
+          <span>README.md</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Global Header Navigation -->
+  <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-8 z-40 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Logo and Tagline -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
+          <i data-lucide="leaf" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-xl font-bold tracking-tight text-slate-900">EcoSort<span class="text-brand-600">AI</span></span>
+            <span class="text-[10px] font-extrabold uppercase tracking-wider bg-brand-100 text-brand-800 px-1.5 py-0.5 rounded">v1.0</span>
+          </div>
+          <p class="text-[10px] text-slate-500 font-medium tracking-wide">Identify. Segregate. Sustain.</p>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden lg:flex items-center gap-1 font-medium text-sm text-slate-600">
+        <a href="#analyzer" class="px-3 py-2 rounded-lg hover:text-brand-700 hover:bg-brand-50 transition flex items-center gap-1.5">
+          <i data-lucide="sparkles" class="w-4 h-4 text-brand-600"></i>
+          <span>AI Waste Analyzer</span>
+        </a>
+        <a href="#knowledge" class="px-3 py-2 rounded-lg hover:text-brand-700 hover:bg-brand-50 transition">
+          Knowledge Base
+        </a>
+        <a href="#dashboard" class="px-3 py-2 rounded-lg hover:text-brand-700 hover:bg-brand-50 transition flex items-center gap-1">
+          <i data-lucide="bar-chart-3" class="w-4 h-4 text-slate-500"></i>
+          <span>Eco Dashboard</span>
+        </a>
+        <a href="#responsible-ai" class="px-3 py-2 rounded-lg hover:text-brand-700 hover:bg-brand-50 transition flex items-center gap-1">
+          <i data-lucide="shield-check" class="w-4 h-4 text-brand-600"></i>
+          <span>Responsible AI</span>
+        </a>
+        <a href="#design-thinking" class="px-3 py-2 rounded-lg hover:text-brand-700 hover:bg-brand-50 transition">
+          Design Thinking
+        </a>
+        <a href="#about-project" class="px-3 py-2 rounded-lg hover:text-brand-700 hover:bg-brand-50 transition">
+          About Project
+        </a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="flex items-center gap-2">
+        <a href="#analyzer" class="bg-brand-600 hover:bg-brand-700 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-sm hover:shadow transition flex items-center gap-1.5">
+          <i data-lucide="scan-line" class="w-4 h-4"></i>
+          <span>Start Analyzing</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Mobile Sub-Menu -->
+    <div class="lg:hidden flex items-center gap-2 px-4 py-2 overflow-x-auto border-t border-slate-100 text-xs custom-scrollbar">
+      <a href="#analyzer" class="whitespace-nowrap px-3 py-1.5 rounded-full bg-brand-50 text-brand-700 font-medium">AI Analyzer</a>
+      <a href="#knowledge" class="whitespace-nowrap px-3 py-1.5 rounded-full bg-slate-100 text-slate-700">Knowledge Base</a>
+      <a href="#dashboard" class="whitespace-nowrap px-3 py-1.5 rounded-full bg-slate-100 text-slate-700">Eco Dashboard</a>
+      <a href="#responsible-ai" class="whitespace-nowrap px-3 py-1.5 rounded-full bg-slate-100 text-slate-700">Responsible AI</a>
+      <a href="#design-thinking" class="whitespace-nowrap px-3 py-1.5 rounded-full bg-slate-100 text-slate-700">Design Thinking</a>
+      <a href="#about-project" class="whitespace-nowrap px-3 py-1.5 rounded-full bg-slate-100 text-slate-700">About</a>
+    </div>
+  </header>
+
+  <main class="flex-1">
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative overflow-hidden bg-gradient-to-b from-brand-950 via-slate-900 to-slate-950 text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+      <!-- Background Ambient Dots -->
+      <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#34d399_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+
+      <div class="max-w-5xl mx-auto text-center relative z-10">
+        <!-- SDG Pill Badges -->
+        <div class="inline-flex flex-wrap items-center justify-center gap-2 mb-6">
+          <div class="inline-flex items-center gap-1.5 bg-brand-900/90 border border-brand-600 text-brand-200 text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
+            <i data-lucide="award" class="w-3.5 h-3.5 text-brand-400"></i>
+            <span>Primary: UN SDG 12 (Responsible Consumption &amp; Production)</span>
+          </div>
+          <div class="inline-flex items-center gap-1.5 bg-teal-900/90 border border-teal-600 text-teal-200 text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
+            <i data-lucide="building-2" class="w-3.5 h-3.5 text-teal-400"></i>
+            <span>Secondary: UN SDG 11 (Sustainable Cities &amp; Communities)</span>
+          </div>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+          Turn Waste Into <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 via-teal-300 to-emerald-400">Better Choices</span>
+        </h1>
+
+        <p class="text-base sm:text-lg lg:text-xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed font-normal">
+          EcoSort AI uses artificial intelligence to help people identify, segregate and responsibly manage everyday waste. Empowering households, campuses, and communities to stop mixed landfill contamination at source.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#analyzer" class="w-full sm:w-auto bg-brand-500 hover:bg-brand-400 text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-2 group">
+            <i data-lucide="sparkles" class="w-5 h-5 text-slate-950 group-hover:rotate-12 transition-transform"></i>
+            <span>Analyze Waste Now</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 text-slate-950 group-hover:translate-x-1 transition-transform"></i>
+          </a>
+          <a href="#knowledge" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white font-semibold px-7 py-3.5 rounded-xl border border-white/20 backdrop-blur transition flex items-center justify-center gap-2">
+            <i data-lucide="book-open" class="w-4 h-4 text-brand-300"></i>
+            <span>Learn About Sustainability</span>
+          </a>
+          <a href="#dashboard" class="w-full sm:w-auto text-xs text-slate-300 hover:text-white px-4 py-2 border border-slate-700 rounded-xl hover:bg-slate-800 transition flex items-center justify-center gap-1.5">
+            <i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i>
+            <span>Explore Prototype Data</span>
+          </a>
+        </div>
+
+        <!-- 3 Pillars Grid: Problem, Solution, SDG Alignment -->
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+          <div class="bg-white/5 border border-white/10 p-5 rounded-2xl backdrop-blur-sm">
+            <div class="w-9 h-9 rounded-lg bg-rose-500/20 text-rose-300 flex items-center justify-center mb-3">
+              <i data-lucide="alert-circle" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-1">The Real-World Problem</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Everyday consumers struggle to differentiate composite packaging, recyclable plastics, and hazardous goods. Unsegregated waste contaminates entire recycling trucks, forcing over 60% of recyclable materials into toxic open dumps and incinerators.
+            </p>
+          </div>
+
+          <div class="bg-white/5 border border-white/10 p-5 rounded-2xl backdrop-blur-sm">
+            <div class="w-9 h-9 rounded-lg bg-brand-500/20 text-brand-300 flex items-center justify-center mb-3">
+              <i data-lucide="cpu" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-1">The AI-Powered Solution</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              EcoSort AI provides accessible machine intelligence via text description or photo preview. It determines waste streams, explains chemical or mechanical recycling reasons, flags safety alerts, and suggests circular upcycling possibilities.
+            </p>
+          </div>
+
+          <div class="bg-white/5 border border-white/10 p-5 rounded-2xl backdrop-blur-sm">
+            <div class="w-9 h-9 rounded-lg bg-teal-500/20 text-teal-300 flex items-center justify-center mb-3">
+              <i data-lucide="target" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-1">UN SDG 12 &amp; 11 Impact</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Target 12.5 focuses on waste reduction through prevention, recycling, and reuse, while Target 11.6 minimizes adverse per-capita urban environmental impact by addressing municipal solid waste segregation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: AI WASTE ANALYZER -->
+    <section id="analyzer" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <span class="text-xs uppercase font-bold tracking-wider text-brand-700 bg-brand-50 px-3 py-1 rounded-full border border-brand-200">
+          Core AI Feature • Interactive Prototype
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">AI Waste Analysis Assistant</h2>
+        <p class="text-slate-600 text-sm mt-2">
+          Describe an item or upload an image to receive instant classification, handling safety notices, recyclability evaluation, and transparent explainable reasoning.
+        </p>
+      </div>
+
+      <!-- Main Analyzer Card -->
+      <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
+        <!-- Card Ribbon Header -->
+        <div class="bg-slate-900 text-white p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 text-xs text-brand-400 font-semibold mb-1">
+              <i data-lucide="sparkles" class="w-4 h-4"></i>
+              <span>Multi-Modal Input Processing</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold">Input Waste Item Details</h3>
+            <p class="text-xs text-slate-400 mt-1">Select your preferred input method or choose one of the 10 preset test benchmarks below.</p>
+          </div>
+
+          <!-- Dual Input Toggle Buttons -->
+          <div class="flex items-center bg-slate-800 p-1 rounded-xl border border-slate-700 self-start md:self-auto">
+            <button id="tab-btn-text" onclick="switchInputMode('text')" class="px-4 py-2 rounded-lg text-xs font-semibold bg-brand-500 text-slate-950 shadow transition flex items-center gap-1.5">
+              <i data-lucide="type" class="w-3.5 h-3.5"></i>
+              <span>Text Description</span>
+            </button>
+            <button id="tab-btn-image" onclick="switchInputMode('image')" class="px-4 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5">
+              <i data-lucide="camera" class="w-3.5 h-3.5"></i>
+              <span>Image Upload</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Analyzer Body Grid -->
+        <div class="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
+          <!-- LEFT: Input Controls & Presets (7 cols) -->
+          <div class="lg:col-span-6 space-y-6">
+            <!-- MODE A: Text Input Container -->
+            <div id="input-mode-text" class="space-y-3">
+              <label for="waste-text-input" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                Describe the item or ask a question:
+              </label>
+              <div class="relative">
+                <input 
+                  type="text" 
+                  id="waste-text-input"
+                  placeholder="e.g., 'old mobile charger', 'empty aluminium soda can', 'cracked mirror'..."
+                  class="w-full px-4 py-3.5 pr-10 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white text-sm transition"
+                  onkeydown="if(event.key === 'Enter') triggerAnalysis();"
+                />
+                <button onclick="clearInputs()" class="absolute right-3 top-3.5 text-slate-400 hover:text-slate-600" title="Clear input">
+                  <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+              </div>
+              <p class="text-[11px] text-slate-500 flex items-center gap-1">
+                <i data-lucide="info" class="w-3.5 h-3.5 text-brand-600"></i>
+                <span>Supports natural language questions like: "How do I safely throw away an old swollen phone battery?"</span>
+              </p>
+            </div>
+
+            <!-- MODE B: Image Upload Container (Hidden by default) -->
+            <div id="input-mode-image" class="space-y-3 hidden">
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                Upload or Drag &amp; Drop Item Photo:
+              </label>
+              <div 
+                id="drop-zone"
+                onclick="document.getElementById('image-file-input').click()"
+                ondragover="handleDragOver(event)"
+                ondragleave="handleDragLeave(event)"
+                ondrop="handleDrop(event)"
+                class="border-2 border-dashed border-slate-300 hover:border-brand-500 bg-slate-50 hover:bg-brand-50/30 rounded-2xl p-6 text-center cursor-pointer transition flex flex-col items-center justify-center min-h-[160px]"
+              >
+                <input type="file" id="image-file-input" accept="image/*" class="hidden" onchange="handleImageFile(this.files[0])" />
+                
+                <div id="image-upload-prompt" class="flex flex-col items-center">
+                  <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center mb-2">
+                    <i data-lucide="upload-cloud" class="w-6 h-6"></i>
+                  </div>
+                  <p class="text-xs font-bold text-slate-800">Click to upload photo or drag &amp; drop</p>
+                  <p class="text-[11px] text-slate-500 mt-0.5">Supports PNG, JPG, WEBP (Mock client-side preview)</p>
+                </div>
+
+                <div id="image-preview-container" class="hidden flex flex-col items-center">
+                  <img id="image-preview-element" src="" alt="Uploaded Waste Preview" class="max-h-36 rounded-lg object-contain border border-slate-200 shadow-sm" />
+                  <span class="mt-2 text-[11px] font-semibold text-brand-700 bg-brand-100 px-2.5 py-0.5 rounded-full">
+                    Image ready for AI inference
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Analyze Action Buttons -->
+            <div class="flex items-center gap-3">
+              <button 
+                id="btn-analyze"
+                onclick="triggerAnalysis()"
+                class="flex-1 bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm py-3.5 px-6 rounded-xl shadow-md shadow-brand-600/20 transition flex items-center justify-center gap-2"
+              >
+                <i data-lucide="sparkles" class="w-4 h-4"></i>
+                <span>Analyze with AI</span>
+              </button>
+              <button 
+                onclick="clearInputs()"
+                class="px-4 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl border border-slate-300 transition"
+              >
+                Reset
+              </button>
+            </div>
+
+            <!-- 10 QUICK TEST PRESET BUTTONS (Project Evaluation Test Suite) -->
+            <div class="border-t border-slate-200 pt-5">
+              <div class="flex items-center justify-between mb-2.5">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                  <i data-lucide="check-square" class="w-3.5 h-3.5 text-brand-600"></i>
+                  <span>10 Evaluation Benchmark Presets</span>
+                </span>
+                <span class="text-[11px] text-brand-700 font-medium">Click to test instantly:</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5" id="preset-container">
+                <!-- Preset buttons populated by JS -->
+              </div>
+            </div>
+
+            <!-- Workflow Architecture Diagram Micro-Box -->
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs text-slate-600">
+              <div class="flex items-center gap-1.5 font-bold text-slate-800 mb-1">
+                <i data-lucide="workflow" class="w-3.5 h-3.5 text-brand-600"></i>
+                <span>AI Pipeline:</span>
+              </div>
+              <p class="text-[11px] text-slate-500 leading-normal">
+                User Input &rarr; AI Tokenizer/Vision &rarr; Waste Classifier &rarr; Rules &amp; Safety Knowledge Retrieval &rarr; Disposal Recommendation &rarr; Explainability Reasoning.
+              </p>
+            </div>
+          </div>
+
+          <!-- RIGHT: AI Analysis Result Display (5 cols) -->
+          <div class="lg:col-span-6 bg-slate-50 rounded-2xl p-6 border border-slate-200 flex flex-col justify-center min-h-[440px] relative">
+            
+            <!-- STATE 1: Empty Initial Prompt -->
+            <div id="state-empty" class="text-center py-8">
+              <div class="w-16 h-16 rounded-2xl bg-white border border-slate-200 text-slate-400 flex items-center justify-center mx-auto mb-4 shadow-sm">
+                <i data-lucide="scan" class="w-8 h-8"></i>
+              </div>
+              <h4 class="text-base font-bold text-slate-800">Awaiting Waste Input</h4>
+              <p class="text-xs text-slate-500 max-w-sm mx-auto mt-1 mb-4">
+                Type an item name, select one of the 10 evaluation test presets, or upload a photo to inspect recyclability and municipal disposal methods.
+              </p>
+              <button onclick="runPreset('plastic_bottle')" class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-700 bg-brand-50 hover:bg-brand-100 px-3 py-1.5 rounded-lg border border-brand-200 transition">
+                <i data-lucide="play" class="w-3 h-3"></i>
+                <span>Try Demo: Plastic Bottle</span>
+              </button>
+            </div>
+
+            <!-- STATE 2: Animated AI Pipeline Loading -->
+            <div id="state-loading" class="hidden py-8 text-center space-y-5">
+              <div class="w-16 h-16 rounded-2xl bg-brand-100 text-brand-700 flex items-center justify-center mx-auto shadow-inner glow-effect">
+                <i data-lucide="cpu" class="w-8 h-8 animate-spin"></i>
+              </div>
+              <div>
+                <h4 class="text-base font-bold text-slate-900">AI Neural Engine Active</h4>
+                <p class="text-xs text-slate-500 mt-0.5" id="pipeline-status-text">Tokenizing waste attributes...</p>
+              </div>
+
+              <!-- Animated step progress list -->
+              <div class="max-w-xs mx-auto space-y-2 text-left text-xs">
+                <div id="pipe-step-1" class="flex items-center gap-2 text-slate-400">
+                  <i data-lucide="circle-dot" class="w-3.5 h-3.5"></i>
+                  <span>1. Parsing input item query</span>
+                </div>
+                <div id="pipe-step-2" class="flex items-center gap-2 text-slate-400">
+                  <i data-lucide="circle-dot" class="w-3.5 h-3.5"></i>
+                  <span>2. Classifying into 6 primary waste streams</span>
+                </div>
+                <div id="pipe-step-3" class="flex items-center gap-2 text-slate-400">
+                  <i data-lucide="circle-dot" class="w-3.5 h-3.5"></i>
+                  <span>3. Querying safety &amp; circular recovery rules</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- STATE 3: Detailed AI Result Card -->
+            <div id="state-result" class="hidden space-y-4 text-left">
+              <!-- Result Header -->
+              <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
+                <div>
+                  <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 block">Identified Item</span>
+                  <h3 id="res-item-name" class="text-xl font-extrabold text-slate-900">Item Name</h3>
+                </div>
+                <div>
+                  <span id="res-category-badge" class="px-3 py-1 rounded-full text-xs font-bold shadow-sm inline-flex items-center gap-1">
+                    Category
+                  </span>
+                </div>
+              </div>
+
+              <!-- Confidence Meter & Low Confidence Disclaimer -->
+              <div class="bg-white p-3 rounded-xl border border-slate-200">
+                <div class="flex items-center justify-between text-xs font-semibold mb-1">
+                  <span class="text-slate-600 flex items-center gap-1">
+                    <i data-lucide="zap" class="w-3.5 h-3.5 text-amber-500"></i>
+                    <span>AI Confidence Level:</span>
+                  </span>
+                  <span id="res-confidence-text" class="text-slate-900 font-bold">95%</span>
+                </div>
+                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+                  <div id="res-confidence-bar" class="h-full bg-brand-500 rounded-full transition-all duration-700" style="width: 95%;"></div>
+                </div>
+              </div>
+
+              <!-- MANDATORY LOW CONFIDENCE WARNING BANNER -->
+              <div id="res-low-confidence-banner" class="hidden bg-amber-50 border-l-4 border-amber-500 p-3 rounded-r text-xs text-amber-900 flex items-start gap-2">
+                <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                <div class="leading-relaxed">
+                  <strong class="font-bold">AI confidence is low.</strong> Please verify the result with a local waste-management authority or appropriate recycling facility before disposal.
+                </div>
+              </div>
+
+              <!-- Recyclability & Reusability Grid -->
+              <div class="grid grid-cols-2 gap-3 text-xs">
+                <div class="bg-white p-3 rounded-xl border border-slate-200">
+                  <span class="text-slate-500 block font-medium">Recyclable:</span>
+                  <strong id="res-recyclable" class="text-slate-900 text-sm font-bold block mt-0.5">Yes</strong>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200">
+                  <span class="text-slate-500 block font-medium">Reusability / Upcycling:</span>
+                  <strong id="res-reusable" class="text-slate-900 text-xs font-semibold block mt-0.5 truncate" title="">Repurpose container</strong>
+                </div>
+              </div>
+
+              <!-- Recommended Disposal Action -->
+              <div class="bg-white p-3.5 rounded-xl border border-slate-200">
+                <div class="flex items-center gap-1.5 text-xs font-bold text-brand-800 mb-1">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-600"></i>
+                  <span>Recommended Disposal Method:</span>
+                </div>
+                <p id="res-recommendation" class="text-xs text-slate-700 font-medium leading-relaxed">
+                  Disposal details will appear here.
+                </p>
+              </div>
+
+              <!-- Environmental Impact -->
+              <div class="bg-teal-50/70 border border-teal-200 p-3 rounded-xl text-xs text-teal-950">
+                <div class="flex items-center gap-1.5 font-bold mb-0.5 text-teal-900">
+                  <i data-lucide="globe" class="w-3.5 h-3.5 text-teal-700"></i>
+                  <span>Environmental Impact:</span>
+                </div>
+                <p id="res-impact" class="text-teal-900 leading-relaxed font-normal">Environmental savings details.</p>
+              </div>
+
+              <!-- Safety Warning Banner (Shown for hazardous, sharp, or electronic items) -->
+              <div id="res-safety-container" class="bg-rose-50 border border-rose-200 p-3 rounded-xl text-xs text-rose-950">
+                <div class="flex items-center gap-1.5 font-bold text-rose-900 mb-0.5">
+                  <i data-lucide="shield-alert" class="w-4 h-4 text-rose-600"></i>
+                  <span>Safety &amp; Handling Notice:</span>
+                </div>
+                <p id="res-safety" class="text-rose-900 font-medium leading-relaxed"></p>
+              </div>
+
+              <!-- SECTION 3: AI EXPLANATION ("WHY") ACCORDION -->
+              <div class="bg-slate-100 p-3.5 rounded-xl border border-slate-300 text-xs">
+                <div class="flex items-center justify-between font-bold text-slate-900 cursor-pointer" onclick="toggleWhySection()">
+                  <div class="flex items-center gap-1.5">
+                    <i data-lucide="lightbulb" class="w-4 h-4 text-amber-600"></i>
+                    <span>AI Explanation (Why was this recommendation made?):</span>
+                  </div>
+                  <i data-lucide="chevron-down" id="why-chevron" class="w-4 h-4 text-slate-500 transition-transform"></i>
+                </div>
+                <p id="res-explanation" class="mt-2 text-slate-700 leading-relaxed">
+                  Rationale explaining material degradation, chemical classification, and mechanical processing requirements.
+                </p>
+              </div>
+
+              <div class="flex items-center justify-between text-[10px] text-slate-400 pt-1">
+                <span>Model: EcoSort Neural Simulator v1.0</span>
+                <span>Privacy: Zero-Data Retention Active</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: WASTE KNOWLEDGE / LEARN SECTION -->
+    <section id="knowledge" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs uppercase font-bold tracking-wider text-brand-700 bg-brand-50 px-3 py-1 rounded-full border border-brand-200">
+          Sustainable Habits &amp; Education
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Waste Knowledge Hub</h2>
+        <p class="text-slate-600 text-sm mt-2">
+          Practical, science-backed guidance to empower households and students to practice circular resource management.
+        </p>
+      </div>
+
+      <!-- 6 Waste Categories Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        
+        <!-- Card 1: Organic Waste -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-4">
+            <i data-lucide="apple" class="w-5 h-5"></i>
+          </div>
+          <div class="flex items-center justify-between mb-1">
+            <h3 class="text-lg font-bold text-slate-900">Organic &amp; Wet Waste</h3>
+            <span class="text-[10px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-200">Compostable</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed mb-4">
+            Food scraps, vegetable peels, leaves, coffee grounds, and tea leaves. When sent to anaerobic landfills, wet waste rots and generates potent methane gas.
+          </p>
+          <div class="bg-emerald-50/70 p-3 rounded-xl border border-emerald-100 text-xs space-y-1">
+            <strong class="text-emerald-900 block font-semibold">Best Practice:</strong>
+            <p class="text-emerald-800">Segregate in green wet bins or use household compost pits/bokashi buckets to create nutrient-rich soil humus.</p>
+          </div>
+        </div>
+
+        <!-- Card 2: Recyclable Dry Waste -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-4">
+            <i data-lucide="recycle" class="w-5 h-5"></i>
+          </div>
+          <div class="flex items-center justify-between mb-1">
+            <h3 class="text-lg font-bold text-slate-900">Recyclable Dry Materials</h3>
+            <span class="text-[10px] font-bold bg-blue-50 text-blue-700 px-2 py-0.5 rounded border border-blue-200">Circular</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed mb-4">
+            Newspapers, magazines, cardboard boxes, paper bags, metal beverage cans, and clean glass bottles. Paper can be repulped 5 to 7 times.
+          </p>
+          <div class="bg-blue-50/70 p-3 rounded-xl border border-blue-100 text-xs space-y-1">
+            <strong class="text-blue-900 block font-semibold">Best Practice:</strong>
+            <p class="text-blue-800">Ensure materials are clean and dry. Flatten cardboard boxes and crush soda cans to maximize storage and transport volume.</p>
+          </div>
+        </div>
+
+        <!-- Card 3: Plastic Waste -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center mb-4">
+            <i data-lucide="cup-soda" class="w-5 h-5"></i>
+          </div>
+          <div class="flex items-center justify-between mb-1">
+            <h3 class="text-lg font-bold text-slate-900">Plastic Waste</h3>
+            <span class="text-[10px] font-bold bg-amber-50 text-amber-700 px-2 py-0.5 rounded border border-amber-200">Resin Codes 1-7</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed mb-4">
+            PET bottles, milk jugs (HDPE), shampoo bottles, and containers. Single-use non-recyclable multi-layered sachets break down into hazardous microplastics.
+          </p>
+          <div class="bg-amber-50/70 p-3 rounded-xl border border-amber-100 text-xs space-y-1">
+            <strong class="text-amber-900 block font-semibold">Best Practice:</strong>
+            <p class="text-amber-800">Rinse residual liquids. Check bottom for resin codes (#1 PET and #2 HDPE have the highest recycling value).</p>
+          </div>
+        </div>
+
+        <!-- Card 4: E-Waste -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center mb-4">
+            <i data-lucide="smartphone" class="w-5 h-5"></i>
+          </div>
+          <div class="flex items-center justify-between mb-1">
+            <h3 class="text-lg font-bold text-slate-900">E-Waste (Electronics)</h3>
+            <span class="text-[10px] font-bold bg-purple-50 text-purple-700 px-2 py-0.5 rounded border border-purple-200">Critical Stream</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed mb-4">
+            Mobile chargers, cables, circuit boards, obsolete phones, and computer peripherals. Contributes over 70% of heavy metals in landfills.
+          </p>
+          <div class="bg-purple-50/70 p-3 rounded-xl border border-purple-100 text-xs space-y-1">
+            <strong class="text-purple-900 block font-semibold">Best Practice:</strong>
+            <p class="text-purple-800">Never discard with regular garbage. Hand over to authorized EPR buy-back programs or retail electronic kiosks.</p>
+          </div>
+        </div>
+
+        <!-- Card 5: Hazardous Waste -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center mb-4">
+            <i data-lucide="flame" class="w-5 h-5"></i>
+          </div>
+          <div class="flex items-center justify-between mb-1">
+            <h3 class="text-lg font-bold text-slate-900">Domestic Hazardous</h3>
+            <span class="text-[10px] font-bold bg-rose-50 text-rose-700 px-2 py-0.5 rounded border border-rose-200">High Danger</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed mb-4">
+            Batteries, paint cans, solvent tins, aerosol sprays, chemical bleaches, and broken glass shards. Threatens sanitation workers with lacerations and caustic burns.
+          </p>
+          <div class="bg-rose-50/70 p-3 rounded-xl border border-rose-100 text-xs space-y-1">
+            <strong class="text-rose-900 block font-semibold">Best Practice:</strong>
+            <p class="text-rose-800">Wrap sharp broken glass in cardboard; tape battery terminals; store chemicals in original labeled jars for designated collection.</p>
+          </div>
+        </div>
+
+        <!-- Card 6: General / Sanitary Waste -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 rounded-xl bg-slate-200 text-slate-700 flex items-center justify-center mb-4">
+            <i data-lucide="trash-2" class="w-5 h-5"></i>
+          </div>
+          <div class="flex items-center justify-between mb-1">
+            <h3 class="text-lg font-bold text-slate-900">General &amp; Sanitary</h3>
+            <span class="text-[10px] font-bold bg-slate-100 text-slate-700 px-2 py-0.5 rounded border border-slate-300">Inert / Residual</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed mb-4">
+            Soiled diapers, sanitary napkins, ceramic mugs, thermal receipts, and dust swept from floors. Unrecoverable via standard recycling channels.
+          </p>
+          <div class="bg-slate-100 p-3 rounded-xl border border-slate-200 text-xs space-y-1">
+            <strong class="text-slate-900 block font-semibold">Best Practice:</strong>
+            <p class="text-slate-700">Wrap sanitary items separately in paper marked with a red dot. Place in black or dark gray residual municipal bins.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 5: ECO IMPACT DASHBOARD -->
+    <section id="dashboard" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200">
+      
+      <!-- MANDATORY DEMO DATA DISCLAIMER -->
+      <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 sm:p-5 mb-10 flex items-start gap-3.5 shadow-sm">
+        <i data-lucide="alert-triangle" class="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5"></i>
+        <div class="text-xs sm:text-sm text-amber-950 leading-relaxed">
+          <strong class="font-bold text-amber-900 uppercase tracking-wide block mb-0.5">
+            Prototype Demonstration Data (Simulated for Academic Evaluation)
+          </strong>
+          All statistics, item counts, and category proportions displayed on this dashboard represent <strong>mock/simulated demonstration data</strong> designed to illustrate data analytics capabilities for the 1M1B Virtual Internship. They do <em>not</em> represent real-world municipal environmental impact measurements.
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="text-xs uppercase font-bold tracking-wider text-brand-700 bg-brand-50 px-3 py-1 rounded-full border border-brand-200">
+            Analytics Module
+          </span>
+          <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Simulated Community Impact Metrics</h2>
+          <p class="text-slate-600 text-xs sm:text-sm mt-1">Illustrating how municipal and campus dashboard administrators can track community sorting patterns.</p>
+        </div>
+        <button onclick="simulateNewQuery()" class="self-start md:self-auto text-xs bg-slate-900 hover:bg-slate-800 text-white font-semibold px-4 py-2 rounded-xl transition flex items-center gap-1.5 shadow-sm">
+          <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-brand-400"></i>
+          <span>Simulate +1 User Query</span>
+        </button>
+      </div>
+
+      <!-- Metric KPI Counter Cards -->
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-center">
+          <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block">Total Analyzed</span>
+          <strong id="kpi-total" class="text-3xl font-black text-slate-900 mt-1 block">1,428</strong>
+          <span class="text-[11px] text-brand-700 font-medium">Inquiries processed</span>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-blue-200 shadow-sm text-center">
+          <span class="text-xs font-bold text-blue-700 uppercase tracking-wider block">Recyclables</span>
+          <strong id="kpi-recyclable" class="text-3xl font-black text-blue-700 mt-1 block">612</strong>
+          <span class="text-[11px] text-blue-600 font-medium">Diverted dry stream</span>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-emerald-200 shadow-sm text-center">
+          <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider block">Organic Waste</span>
+          <strong id="kpi-organic" class="text-3xl font-black text-emerald-700 mt-1 block">490</strong>
+          <span class="text-[11px] text-emerald-600 font-medium">Composted humus</span>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-purple-200 shadow-sm text-center">
+          <span class="text-xs font-bold text-purple-700 uppercase tracking-wider block">E-Waste Logged</span>
+          <strong id="kpi-ewaste" class="text-3xl font-black text-purple-700 mt-1 block">184</strong>
+          <span class="text-[11px] text-purple-600 font-medium">EPR collection units</span>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-rose-200 shadow-sm text-center col-span-2 md:col-span-1">
+          <span class="text-xs font-bold text-rose-700 uppercase tracking-wider block">Hazardous / Other</span>
+          <strong id="kpi-other" class="text-3xl font-black text-rose-700 mt-1 block">142</strong>
+          <span class="text-[11px] text-rose-600 font-medium">Safe isolated disposal</span>
+        </div>
+      </div>
+
+      <!-- Visual Charts Representation Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Distribution Bars Chart (7 cols) -->
+        <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Waste Category Distribution</h3>
+              <p class="text-xs text-slate-500">Breakdown of simulated items scanned by households</p>
+            </div>
+            <span class="text-[11px] font-semibold bg-slate-100 px-2 py-1 rounded text-slate-600 border border-slate-200">
+              Live Mock Data
+            </span>
+          </div>
+
+          <div class="space-y-4 pt-2">
+            <div>
+              <div class="flex justify-between text-xs font-semibold text-slate-700 mb-1">
+                <span>Recyclable Dry Materials (Cardboard, Paper, Metal Cans)</span>
+                <span id="chart-pct-rec">42.8% (612 items)</span>
+              </div>
+              <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+                <div id="bar-rec" class="h-full bg-blue-600 rounded-full transition-all duration-500" style="width: 42.8%;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs font-semibold text-slate-700 mb-1">
+                <span>Organic &amp; Food Residue (Peels, Leftovers, Compost)</span>
+                <span id="chart-pct-org">34.3% (490 items)</span>
+              </div>
+              <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+                <div id="bar-org" class="h-full bg-emerald-600 rounded-full transition-all duration-500" style="width: 34.3%;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs font-semibold text-slate-700 mb-1">
+                <span>E-Waste (Mobile Chargers, Phones, Batteries)</span>
+                <span id="chart-pct-ewaste">12.9% (184 items)</span>
+              </div>
+              <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+                <div id="bar-ewaste" class="h-full bg-purple-600 rounded-full transition-all duration-500" style="width: 12.9%;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs font-semibold text-slate-700 mb-1">
+                <span>Hazardous &amp; General Residuals (Glass, Chemicals)</span>
+                <span id="chart-pct-other">10.0% (142 items)</span>
+              </div>
+              <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+                <div id="bar-other" class="h-full bg-rose-600 rounded-full transition-all duration-500" style="width: 10.0%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weekly Query Volume Activity (5 cols) -->
+        <div class="lg:col-span-5 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h3 class="text-base font-bold text-slate-900">Weekly Segregation Queries</h3>
+                <p class="text-xs text-slate-500">Simulated 7-day volume trend in pilot community</p>
+              </div>
+              <i data-lucide="trending-up" class="w-4 h-4 text-brand-600"></i>
+            </div>
+
+            <!-- Bar Columns Graph -->
+            <div class="flex items-end justify-between h-40 pt-4 border-b border-slate-200 px-2">
+              <div class="flex flex-col items-center gap-1.5 w-8">
+                <span class="text-[10px] text-slate-500 font-mono">140</span>
+                <div class="w-full bg-brand-500 rounded-t-md hover:bg-brand-400 transition" style="height: 48px;"></div>
+                <span class="text-[11px] font-semibold text-slate-600">Mon</span>
+              </div>
+              <div class="flex flex-col items-center gap-1.5 w-8">
+                <span class="text-[10px] text-slate-500 font-mono">180</span>
+                <div class="w-full bg-brand-500 rounded-t-md hover:bg-brand-400 transition" style="height: 62px;"></div>
+                <span class="text-[11px] font-semibold text-slate-600">Tue</span>
+              </div>
+              <div class="flex flex-col items-center gap-1.5 w-8">
+                <span class="text-[10px] text-slate-500 font-mono">210</span>
+                <div class="w-full bg-brand-500 rounded-t-md hover:bg-brand-400 transition" style="height: 72px;"></div>
+                <span class="text-[11px] font-semibold text-slate-600">Wed</span>
+              </div>
+              <div class="flex flex-col items-center gap-1.5 w-8">
+                <span class="text-[10px] text-slate-500 font-mono">260</span>
+                <div class="w-full bg-brand-500 rounded-t-md hover:bg-brand-400 transition" style="height: 90px;"></div>
+                <span class="text-[11px] font-semibold text-slate-600">Thu</span>
+              </div>
+              <div class="flex flex-col items-center gap-1.5 w-8">
+                <span class="text-[10px] text-slate-500 font-mono">295</span>
+                <div class="w-full bg-brand-500 rounded-t-md hover:bg-brand-400 transition" style="height: 102px;"></div>
+                <span class="text-[11px] font-semibold text-slate-600">Fri</span>
+              </div>
+              <div class="flex flex-col items-center gap-1.5 w-8">
+                <span class="text-[10px] text-slate-500 font-mono">350</span>
+                <div class="w-full bg-teal-500 rounded-t-md hover:bg-teal-400 transition" style="height: 120px;"></div>
+                <span class="text-[11px] font-bold text-teal-700">Sat</span>
+              </div>
+              <div class="flex flex-col items-center gap-1.5 w-8">
+                <span class="text-[10px] text-slate-500 font-mono">315</span>
+                <div class="w-full bg-teal-500 rounded-t-md hover:bg-teal-400 transition" style="height: 108px;"></div>
+                <span class="text-[11px] font-bold text-teal-700">Sun</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Simulated Campus Pilot: Zone C</span>
+            <span class="text-brand-700 font-bold">93% Proper Bin Adherence</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: RESPONSIBLE AI SECTION -->
+    <section id="responsible-ai" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs uppercase font-bold tracking-wider text-brand-700 bg-brand-50 px-3 py-1 rounded-full border border-brand-200">
+          AI Ethics, Trust &amp; Governance
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Responsible AI Considerations</h2>
+        <p class="text-slate-600 text-sm mt-2">
+          As required by the 1M1B and IBM SkillsBuild framework, EcoSort AI incorporates ethical AI governance to guarantee user safety, privacy, fairness, and accountability.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 1. Fairness -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:border-brand-300 transition">
+          <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-4">
+            <i data-lucide="scale" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">1. Fairness &amp; Inclusivity</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            The model avoids socioeconomic assumptions and provides universally accessible waste guidance. Whether a user describes a premium smartphone or local scrap plastic, instructions adhere to objective material science without bias.
+          </p>
+        </div>
+
+        <!-- 2. Transparency -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:border-brand-300 transition">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-4">
+            <i data-lucide="eye" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">2. Transparency &amp; Rationale</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Every classification provides an explicit explainability reasoning card ("Why"). We demystify the AI black box by explaining polymer resin characteristics, combustion hazards, or biological decomposition requirements.
+          </p>
+        </div>
+
+        <!-- 3. Privacy -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:border-brand-300 transition">
+          <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center mb-4">
+            <i data-lucide="lock" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">3. Privacy-by-Design</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Uploaded images are held ephemerally in browser client-side memory using the HTML5 FileReader API. No user photographs, GPS coordinates, or identifiable personal telemetry are stored in external tracking databases.
+          </p>
+        </div>
+
+        <!-- 4. Safety -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:border-brand-300 transition">
+          <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center mb-4">
+            <i data-lucide="shield-alert" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">4. Safety-First Warnings</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Whenever hazardous goods (such as lithium battery fire risks, broken glass lacerations, or corrosive chemical leachates) are detected, prominent high-contrast warning cards mandate protective gear and safe packaging.
+          </p>
+        </div>
+
+        <!-- 5. Limitations -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:border-brand-300 transition">
+          <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center mb-4">
+            <i data-lucide="help-circle" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">5. Explicit Limitations</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            AI computer vision can misclassify heavily contaminated, crumpled, or multi-laminated packaging. The application displays an AI confidence meter and flags any predictions falling below 70% threshold.
+          </p>
+        </div>
+
+        <!-- 6. Human Verification -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:border-brand-300 transition">
+          <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center mb-4">
+            <i data-lucide="users" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">6. Human-in-the-Loop</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            The platform explicitly directs users to contact certified municipal sanitation operators or authorized recycling facilities whenever safety-critical or non-standard industrial waste is involved.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: DESIGN THINKING SECTION -->
+    <section id="design-thinking" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs uppercase font-bold tracking-wider text-brand-700 bg-brand-50 px-3 py-1 rounded-full border border-brand-200">
+          Academic Innovation Methodology
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">The 5 Stages of Design Thinking</h2>
+        <p class="text-slate-600 text-sm mt-2">
+          Structured human-centered approach followed throughout the 1M1B AI for Sustainability Virtual Internship.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <!-- Stage 1 -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6 hover:border-blue-300 transition">
+          <div class="md:w-1/4">
+            <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Stage 01</span>
+            <h3 class="text-xl font-bold text-slate-900 mt-0.5">Empathize</h3>
+            <p class="text-xs text-slate-400">User Research &amp; Observation</p>
+          </div>
+          <div class="md:w-3/4 text-xs text-slate-600 leading-relaxed">
+            <p class="font-medium text-slate-800 mb-1">
+              Conducted surveys among student dormitories and residential apartments to uncover the root cause of contaminated dry recycling bins.
+            </p>
+            <p class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <strong>Key Finding:</strong> 72% of participants wanted to recycle responsibly but were confused by ambiguous resin codes (like #5 PP vs #7 Other) and did not know whether soiled takeaway containers were recyclable.
+            </p>
+          </div>
+        </div>
+
+        <!-- Stage 2 -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6 hover:border-teal-300 transition">
+          <div class="md:w-1/4">
+            <span class="text-xs font-bold uppercase tracking-wider text-teal-600">Stage 02</span>
+            <h3 class="text-xl font-bold text-slate-900 mt-0.5">Define</h3>
+            <p class="text-xs text-slate-400">Core Problem Statement</p>
+          </div>
+          <div class="md:w-3/4 text-xs text-slate-600 leading-relaxed">
+            <p class="font-medium text-slate-800 mb-1">
+              Synthesized research into an actionable human-centric problem statement aligned with United Nations SDG 12.
+            </p>
+            <p class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <strong>Problem Statement:</strong> "Households and students need an instant, non-technical way to verify waste recyclability and handling safety at the bin side so that contaminated items do not ruin clean municipal recycling streams."
+            </p>
+          </div>
+        </div>
+
+        <!-- Stage 3 -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6 hover:border-brand-300 transition">
+          <div class="md:w-1/4">
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-600">Stage 03</span>
+            <h3 class="text-xl font-bold text-slate-900 mt-0.5">Ideate</h3>
+            <p class="text-xs text-slate-400">Solution Brainstorming</p>
+          </div>
+          <div class="md:w-3/4 text-xs text-slate-600 leading-relaxed">
+            <p class="font-medium text-slate-800 mb-1">
+              Explored barcode scanning, hardware smart bins, chatbot assistants, and computer vision analyzers.
+            </p>
+            <p class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <strong>Chosen Concept:</strong> A web-first, zero-install AI assistant accepting both natural language queries and image uploads, featuring transparent explainability ("Why") so users learn long-term sustainable habits.
+            </p>
+          </div>
+        </div>
+
+        <!-- Stage 4 -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6 hover:border-purple-300 transition">
+          <div class="md:w-1/4">
+            <span class="text-xs font-bold uppercase tracking-wider text-purple-600">Stage 04</span>
+            <h3 class="text-xl font-bold text-slate-900 mt-0.5">Prototype</h3>
+            <p class="text-xs text-slate-400">Implementation</p>
+          </div>
+          <div class="md:w-3/4 text-xs text-slate-600 leading-relaxed">
+            <p class="font-medium text-slate-800 mb-1">
+              Developed the EcoSort AI single-file web application integrating simulated neural inference pipelines and curated waste knowledge engines.
+            </p>
+            <p class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <strong>Features Built:</strong> Multi-modal input (text/image), confidence indicator, low-confidence disclaimer banner, 10 benchmark test presets, and simulated community eco dashboard.
+            </p>
+          </div>
+        </div>
+
+        <!-- Stage 5 -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6 hover:border-rose-300 transition">
+          <div class="md:w-1/4">
+            <span class="text-xs font-bold uppercase tracking-wider text-rose-600">Stage 05</span>
+            <h3 class="text-xl font-bold text-slate-900 mt-0.5">Test</h3>
+            <p class="text-xs text-slate-400">Evaluation &amp; Refinement</p>
+          </div>
+          <div class="md:w-3/4 text-xs text-slate-600 leading-relaxed">
+            <p class="font-medium text-slate-800 mb-1">
+              Evaluated the prototype against 10 critical everyday waste items ranging from organic peels to e-waste and broken glass.
+            </p>
+            <p class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <strong>Iterative Refinements:</strong> Added distinct red warning boxes for hazardous items (such as puncturable lithium batteries and sharp glass) to safeguard frontline sanitation workers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: ABOUT PROJECT & CREDENTIALS -->
+    <section id="about-project" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200">
+      <div class="bg-gradient-to-r from-slate-900 to-brand-950 text-white rounded-3xl p-8 sm:p-12 shadow-xl">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 space-y-4">
+            <div class="inline-flex items-center gap-2 bg-brand-900/70 border border-brand-600 text-brand-300 text-xs px-3 py-1 rounded-full">
+              <i data-lucide="award" class="w-3.5 h-3.5"></i>
+              <span>Academic Prototype Presentation</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">EcoSort AI: Project Overview</h2>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              This application was built as an academic prototype for the <strong>1M1B (1 Million for 1 Billion) AI for Sustainability Virtual Internship</strong> in collaboration with <strong>IBM SkillsBuild</strong> and <strong>AICTE</strong>.
+            </p>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              <strong>Project Objective:</strong> Demonstrate how responsible, transparent, and accessible artificial intelligence can assist ordinary citizens in making better waste-sorting choices, eliminating contamination at source and driving progress toward United Nations SDG 12 (Responsible Consumption and Production) and SDG 11 (Sustainable Cities and Communities).
+            </p>
+
+            <div class="pt-2 flex flex-wrap gap-3">
+              <button onclick="openModal('readme-modal')" class="bg-brand-500 hover:bg-brand-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl transition flex items-center gap-1.5 shadow-md">
+                <i data-lucide="book-open" class="w-4 h-4"></i>
+                <span>Open README &amp; Technical Docs</span>
+              </button>
+              <button onclick="copyReadmeText()" class="bg-white/10 hover:bg-white/20 text-white font-semibold text-xs px-4 py-3 rounded-xl border border-white/20 transition flex items-center gap-1.5">
+                <i data-lucide="copy" class="w-4 h-4"></i>
+                <span id="copy-btn-text">Copy README Markdown</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-sm space-y-3.5 text-xs">
+            <h4 class="font-bold text-white text-sm uppercase tracking-wider border-b border-white/10 pb-2">
+              Internship Specification Summary
+            </h4>
+            <div class="flex justify-between py-1 border-b border-white/5">
+              <span class="text-slate-400">Project:</span>
+              <span class="font-semibold text-white">EcoSort AI</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-white/5">
+              <span class="text-slate-400">Tagline:</span>
+              <span class="font-semibold text-brand-300">Identify. Segregate. Sustain.</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-white/5">
+              <span class="text-slate-400">Program:</span>
+              <span class="font-semibold text-white">1M1B AI for Sustainability</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-white/5">
+              <span class="text-slate-400">Partners:</span>
+              <span class="font-semibold text-white">IBM SkillsBuild &amp; AICTE</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-white/5">
+              <span class="text-slate-400">Primary SDG:</span>
+              <span class="font-semibold text-emerald-400">SDG 12 (Target 12.5)</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-white/5">
+              <span class="text-slate-400">Secondary SDG:</span>
+              <span class="font-semibold text-teal-400">SDG 11 (Target 11.6)</span>
+            </div>
+            <div class="flex justify-between py-1">
+              <span class="text-slate-400">Implementation:</span>
+              <span class="font-semibold text-white">Multi-Modal Web Prototype</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="bg-slate-900 text-slate-400 text-xs py-12 px-4 sm:px-6 lg:px-8 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+      <div class="md:col-span-2 space-y-3">
+        <div class="flex items-center gap-2 text-white font-bold text-base">
+          <div class="w-7 h-7 rounded-lg bg-brand-600 flex items-center justify-center text-white">
+            <i data-lucide="leaf" class="w-4 h-4"></i>
+          </div>
+          <span>EcoSort AI</span>
+        </div>
+        <p class="text-xs text-slate-400 leading-relaxed max-w-md">
+          Empowering households, schools, and smart cities to achieve zero-contamination recycling through transparent, responsible artificial intelligence.
+        </p>
+        <p class="text-[11px] text-slate-500">
+          Academic submission for the 1M1B AI for Sustainability Virtual Internship with IBM SkillsBuild &amp; AICTE.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Quick Navigation</h4>
+        <ul class="space-y-2 text-xs">
+          <li><a href="#analyzer" class="hover:text-white transition">AI Waste Analyzer</a></li>
+          <li><a href="#knowledge" class="hover:text-white transition">Waste Knowledge Base</a></li>
+          <li><a href="#dashboard" class="hover:text-white transition">Demo Impact Dashboard</a></li>
+          <li><a href="#responsible-ai" class="hover:text-white transition">Responsible AI Principles</a></li>
+          <li><a href="#design-thinking" class="hover:text-white transition">5 Design Thinking Stages</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">UN Sustainability Goals</h4>
+        <ul class="space-y-2 text-xs">
+          <li class="text-slate-300 font-medium flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>SDG 12: Responsible Consumption</span>
+          </li>
+          <li class="text-slate-300 font-medium flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-teal-400"></span>
+            <span>SDG 11: Sustainable Cities</span>
+          </li>
+          <li class="text-slate-300 font-medium flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+            <span>SDG 13: Climate Action</span>
+          </li>
+          <li class="pt-2">
+            <button onclick="openModal('readme-modal')" class="text-brand-400 hover:underline flex items-center gap-1 font-semibold">
+              <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+              <span>View Technical README.md</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+      <div>
+        &copy; 2026 EcoSort AI • 1M1B x IBM SkillsBuild x AICTE Academic Prototype.
+      </div>
+      <div class="flex items-center gap-4">
+        <span>Zero-Image Storage</span>
+        <span>•</span>
+        <span>Explainable AI</span>
+        <span>•</span>
+        <span>Client-Side Privacy</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL: README.MD VIEWER -->
+  <div id="readme-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-slate-900 text-slate-200 rounded-2xl max-w-4xl w-full p-6 sm:p-8 shadow-2xl border border-slate-800 max-h-[90vh] flex flex-col">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+        <div class="flex items-center gap-2">
+          <i data-lucide="file-code" class="w-5 h-5 text-brand-400"></i>
+          <h3 class="font-mono text-sm font-bold text-white">README.md — Project Documentation</h3>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="copyReadmeText()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 flex items-center gap-1 transition">
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+            <span id="modal-copy-btn-text">Copy Markdown</span>
+          </button>
+          <button onclick="closeModal('readme-modal')" class="text-slate-400 hover:text-white p-1 rounded-lg">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Raw Markdown Content Box -->
+      <div class="flex-1 overflow-y-auto font-mono text-xs text-slate-300 space-y-4 bg-slate-950 p-4 rounded-xl border border-slate-800 custom-scrollbar select-text leading-relaxed" id="readme-raw-content">
+# EcoSort AI — Identify. Segregate. Sustain.
+
+## 1. Project Context
+- **Project Name:** EcoSort AI
+- **Tagline:** "Identify. Segregate. Sustain."
+- **Academic Framework:** 1M1B AI for Sustainability Virtual Internship
+- **Institutional Partners:** IBM SkillsBuild & AICTE
+- **Primary SDG:** UN SDG 12 — Responsible Consumption and Production (Target 12.5)
+- **Secondary SDG:** UN SDG 11 — Sustainable Cities and Communities (Target 11.6)
+
+## 2. Problem Statement
+People often have difficulty identifying the correct category of everyday waste and understanding how it should be responsibly disposed of. Incorrect segregation results in recyclable, organic, electronic, or hazardous materials being mixed with general landfill waste, contaminating clean recycling streams and threatening municipal sanitation workers.
+
+## 3. Core AI Workflow Architecture
+```
+USER INPUT (Text Query / Photo Upload)
+      ↓
+AI PROCESSING (Normalization, Tokenization, Vision Analysis)
+      ↓
+WASTE CLASSIFICATION (Organic, Recyclable, Plastic, E-Waste, Hazardous, General)
+      ↓
+KNOWLEDGE RETRIEVAL (Material science, Safety protocols, Resin identification)
+      ↓
+DISPOSAL RECOMMENDATION (Step-by-step preparation instructions)
+      ↓
+EXPLANATION ("Why" rationale for long-term user habit transformation)
+      ↓
+USER ACTION (Appropriate municipal bin placement)
+```
+
+## 4. Key Features
+- **Dual Input Interface:** Text natural language input & Drag-and-drop Image Preview.
+- **10 Benchmark Quick Test Presets:** Immediate verification for Plastic Bottle, Banana Peel, Newspaper, Old Mobile Phone, Battery, Cardboard Box, Food Leftovers, Charger, Aluminium Can, and Broken Glass.
+- **Explainable AI:** Demystifies the classification with rationale and material recovery chemistry.
+- **Safety First:** Flags dangerous physical laceration or chemical explosion hazards (lithium-ion batteries, fluorescent mercury lights, sharp cullet).
+- **Responsible AI Guardrails:** Embedded low-confidence disclaimers for scores under 70%, human-in-the-loop verification notices, and client-side ephemeral image processing.
+- **Eco Impact Dashboard:** Simulated demonstration data showcasing community segregation metrics.
+
+## 5. Technology Stack
+- **Frontend:** Single-file HTML5, Vanilla JavaScript (ES6+), Tailwind CSS CDN.
+- **Icons:** Lucide Icons.
+- **Inference Architecture:** Dual-engine ready (Curated offline rules engine + Gemini 3 Flash REST endpoint ready).
+
+## 6. Installation & Local Setup
+```bash
+# Clone the repository
+git clone https://github.com/student/ecosort-ai.git
+cd ecosort-ai
+
+# Running as a static web application
+# Open index.html directly in any modern browser, or run a local static server:
+npx serve .
+# or
+python3 -m http.server 8000
+```
+
+## 7. Environment Variables (.env.example)
+```env
+# Optional external LLM configuration (Keep on backend / never expose in frontend)
+VITE_GEMINI_API_KEY=your_gemini_api_key_here
+VITE_API_ENDPOINT=https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent
+```
+
+## 8. Responsible AI Implementation
+- **Fairness:** Provides identical objective disposal standards across all socio-economic groups.
+- **Transparency:** Clear "Why" explainability accordion for every item.
+- **Privacy:** Client-side preview via FileReader API; zero backend photo logging.
+- **Safety:** High-visibility hazard alerts for batteries, broken glass, and chemicals.
+- **Limitations:** Explicit disclaimer when confidence is below 70%.
+- **Human Verification:** Guidance to confirm hazardous items with local municipal operators.
+
+## 9. Future Scope & Roadmap
+- Integration with local municipal GPS recycling kiosks and e-waste collection schedules.
+- Multilingual voice interface supporting regional Indian languages for sanitation personnel.
+- On-device lightweight edge AI vision models (TensorFlow.js) for offline field sorting.
+- Extended Producer Responsibility (EPR) reverse-logistics barcode scanner.
+      </div>
+
+      <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center text-xs text-slate-400">
+        <span>Verified for 1M1B Virtual Internship Evaluation</span>
+        <button onclick="closeModal('readme-modal')" class="bg-brand-600 hover:bg-brand-500 text-white font-semibold px-4 py-2 rounded-lg transition">
+          Close Documentation
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast" class="fixed bottom-6 right-6 bg-slate-900 text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-2xl border border-slate-700 flex items-center gap-2 transform translate-y-24 opacity-0 transition-all duration-300 z-50">
+    <i data-lucide="check-circle" class="w-4 h-4 text-brand-400"></i>
+    <span id="toast-message">Notification message</span>
+  </div>
+
+  <script>
+    // 10 MANDATORY TEST PRESET BENCHMARK DATABASE
+    const TEST_PRESETS = [
+      {
+        id: "plastic_bottle",
+        name: "Plastic Bottle",
+        category: "Plastic Waste",
+        badgeClass: "bg-amber-500 text-white",
+        recyclable: "Yes (High Value)",
+        reusable: "Yes (Rinsed planter, watering tool)",
+        recommendation: "Empty residual liquid, rinse clean, crush to reduce volume, and place in the dry recycling bin.",
+        impact: "PET recycling saves up to 60% of virgin petrochemical manufacturing energy and keeps microplastics out of oceans.",
+        safety: "Ensure cap is either screwed on or separated based on local municipal baling guidelines. Do not burn.",
+        confidence: 96,
+        explanation: "Polyethylene Terephthalate (PET resin code 1) is easily melted down and spun into recycled polyester fiber or remanufactured into new bottles.",
+        isHazardous: false
+      },
+      {
+        id: "banana_peel",
+        name: "Banana Peel",
+        category: "Organic Waste",
+        badgeClass: "bg-emerald-600 text-white",
+        recyclable: "Yes (Via Composting)",
+        reusable: "Yes (Soil fertilizer, nutrient tea)",
+        recommendation: "Place in the green organic wet waste bin or add to home compost / vermiculture pit.",
+        impact: "Diverts putrescible organics from landfills, preventing anaerobic bacterial generation of potent methane gas.",
+        safety: "Safe natural organic matter. Decomposes cleanly within 2 to 4 weeks in aerated soil.",
+        confidence: 98,
+        explanation: "Rich in potassium, nitrogen, and carbon; high moisture content makes it an ideal organic feed for aerobic microbial composting.",
+        isHazardous: false
+      },
+      {
+        id: "newspaper",
+        name: "Newspaper",
+        category: "Recyclable Waste",
+        badgeClass: "bg-blue-600 text-white",
+        recyclable: "Yes (Highly Recyclable)",
+        reusable: "Yes (Packaging wrap, glass cleaner, crafts)",
+        recommendation: "Keep clean and completely dry. Stack flat and dispatch to paper recycling bin or scrap collector (Kabadiwala).",
+        impact: "Recycling 1 ton of newsprint saves 17 mature trees, 4,000 kW of energy, and 7,000 gallons of freshwater.",
+        safety: "Keep away from cooking oils or grease. Food oil permanently ruins paper pulp recycling slurries.",
+        confidence: 97,
+        explanation: "Contains unlaminated cellulose wood fibers that can be re-pulped and remanufactured into paper products up to 7 times.",
+        isHazardous: false
+      },
+      {
+        id: "old_phone",
+        name: "Old Mobile Phone",
+        category: "E-Waste",
+        badgeClass: "bg-purple-600 text-white",
+        recyclable: "Yes (Specialized E-Waste Only)",
+        reusable: "Yes (Trade-in, dedicated offline music/camera)",
+        recommendation: "Factory reset personal data. Deliver directly to an authorized e-waste drop-off kiosk or brand take-back program.",
+        impact: "Recovers precious rare-earth metals (gold, copper, silver, lithium) and prevents heavy metal leachate.",
+        safety: "FIRE HAZARD: Do NOT puncture or crush internal lithium-ion battery cell. Never place in household municipal trash.",
+        confidence: 95,
+        explanation: "Composed of complex circuit boards and rechargeable cells requiring specialized pyro/hydrometallurgical refining to prevent toxic leaching.",
+        isHazardous: true
+      },
+      {
+        id: "battery",
+        name: "AA Battery",
+        category: "Hazardous Waste",
+        badgeClass: "bg-rose-600 text-white",
+        recyclable: "Conditional (Specialized hazardous stream)",
+        reusable: "No (Unless rechargeable NiMH variant)",
+        recommendation: "Tape terminal ends with electrical or scotch tape. Deposit in designated municipal hazardous battery collection bins.",
+        impact: "Prevents toxic manganese dioxide, zinc, and caustic potassium hydroxide from poisoning urban water tables.",
+        safety: "CHEMICAL CORROSION RISK: Swollen or leaking batteries emit caustic electrolyte that burns skin. Handle with care.",
+        confidence: 94,
+        explanation: "Galvanic alkaline cells contain heavy metal compounds and alkaline electrolytes regulated under hazardous domestic waste handling rules.",
+        isHazardous: true
+      },
+      {
+        id: "cardboard",
+        name: "Cardboard Box",
+        category: "Recyclable Waste",
+        badgeClass: "bg-blue-600 text-white",
+        recyclable: "Yes (100% Recyclable)",
+        reusable: "Yes (Storage, postal shipping, cat scratcher)",
+        recommendation: "Remove plastic packing tape, flatten completely to save transport space, and place into the dry paper recycling stream.",
+        impact: "Recycled corrugated cardboard reduces manufacturing air pollution by 74% compared to virgin timber pulp.",
+        safety: "Safe to handle. Must remain uncontaminated by kitchen oil or liquid stains.",
+        confidence: 96,
+        explanation: "Kraft unbleached corrugated fiberboard is one of the highest-yield circular materials in commercial paper mills.",
+        isHazardous: false
+      },
+      {
+        id: "food_leftovers",
+        name: "Food Leftovers",
+        category: "Organic Waste",
+        badgeClass: "bg-emerald-600 text-white",
+        recyclable: "Yes (Composting / Biogas)",
+        reusable: "Inspect if suitable for domestic animals",
+        recommendation: "Drain excess gravies/liquids and discard in green organic wet bin for municipal biomethanation.",
+        impact: "Converts putrescible food waste into renewable bio-gas fuel and organic bio-fertilizer.",
+        safety: "Dispose within 24 hours to prevent flies, foul odor, and proliferation of pathogenic bacteria.",
+        confidence: 93,
+        explanation: "Decomposable nitrogenous biomatter suited for anaerobic digesters or aerobic municipal windrow composting.",
+        isHazardous: false
+      },
+      {
+        id: "charger",
+        name: "Old Charger",
+        category: "E-Waste",
+        badgeClass: "bg-purple-600 text-white",
+        recyclable: "Yes (Copper & Plastic Recovery)",
+        reusable: "Yes (Keep as backup, family donation)",
+        recommendation: "Do not cut or incinerate wires. Drop off at an authorized electronic waste drop-box or retailer collection point.",
+        impact: "Recovers valuable copper wiring and prevents toxic PVC halogen emissions caused by open burning.",
+        safety: "Never burn insulated wires. Open wire burning emits carcinogenic dioxins and chlorinated compounds.",
+        confidence: 95,
+        explanation: "Combines copper electrical conductors, miniature transformers, and PVC/TPE casing requiring mechanical cable granulation.",
+        isHazardous: true
+      },
+      {
+        id: "can",
+        name: "Aluminium Can",
+        category: "Recyclable Waste",
+        badgeClass: "bg-blue-600 text-white",
+        recyclable: "Yes (Infinitely Recyclable)",
+        reusable: "Yes (Desk pencil organizer, crafts)",
+        recommendation: "Rinse out residual sugary beverage, crush if desired, and place in dry metal recycling bin.",
+        impact: "Recycling aluminium saves 95% of the energy required to smelt virgin bauxite ore, abating substantial CO2.",
+        safety: "Watch for sharp edges if torn or punctured. Keep clean to avoid attracting pests.",
+        confidence: 99,
+        explanation: "Aluminium alloy retains 100% of its metallurgical properties indefinitely through circular closed-loop smelting.",
+        isHazardous: false
+      },
+      {
+        id: "broken_glass",
+        name: "Broken Glass",
+        category: "Hazardous Waste",
+        badgeClass: "bg-rose-600 text-white",
+        recyclable: "Conditional (Cullet recycling only)",
+        reusable: "No",
+        recommendation: "Carefully wrap in multiple layers of newspaper or seal in a sturdy cardboard box clearly marked 'CAUTION: BROKEN GLASS'.",
+        impact: "Proper packaging protects frontline sanitation workers from severe injuries while enabling cullet glass recovery.",
+        safety: "EXTREME PHYSICAL LACERATION HAZARD: Can cause deep arterial cuts and bloodborne infection to sanitation handlers.",
+        confidence: 91,
+        explanation: "Soda-lime silica glass is meltable but broken shards present an immediate high-severity occupational injury hazard during collection.",
+        isHazardous: true
+      }
+    ];
+
+    // Initialize UI on load
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      renderPresetButtons();
+    });
+
+    // Render 10 Benchmark Preset Buttons
+    function renderPresetButtons() {
+      const container = document.getElementById('preset-container');
+      container.innerHTML = TEST_PRESETS.map(preset => `
+        <button 
+          onclick="runPreset('${preset.id}')"
+          class="text-xs bg-slate-100 hover:bg-brand-100 hover:text-brand-900 text-slate-700 px-2.5 py-1.5 rounded-lg border border-slate-200 transition font-medium flex items-center gap-1"
+        >
+          <span>${preset.name}</span>
+        </button>
+      `).join('');
+    }
+
+    // Switch between Text Input and Image Upload
+    function switchInputMode(mode) {
+      const textBtn = document.getElementById('tab-btn-text');
+      const imgBtn = document.getElementById('tab-btn-image');
+      const textSection = document.getElementById('input-mode-text');
+      const imgSection = document.getElementById('input-mode-image');
+
+      if (mode === 'text') {
+        textBtn.className = "px-4 py-2 rounded-lg text-xs font-semibold bg-brand-500 text-slate-950 shadow transition flex items-center gap-1.5";
+        imgBtn.className = "px-4 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5";
+        textSection.classList.remove('hidden');
+        imgSection.classList.add('hidden');
+      } else {
+        imgBtn.className = "px-4 py-2 rounded-lg text-xs font-semibold bg-brand-500 text-slate-950 shadow transition flex items-center gap-1.5";
+        textBtn.className = "px-4 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5";
+        imgSection.classList.remove('hidden');
+        textSection.classList.add('hidden');
+      }
+      lucide.createIcons();
+    }
+
+    // Drag and drop image handlers
+    function handleDragOver(e) {
+      e.preventDefault();
+      document.getElementById('drop-zone').classList.add('border-brand-500', 'bg-brand-50/40');
+    }
+    function handleDragLeave(e) {
+      e.preventDefault();
+      document.getElementById('drop-zone').classList.remove('border-brand-500', 'bg-brand-50/40');
+    }
+    function handleDrop(e) {
+      e.preventDefault();
+      document.getElementById('drop-zone').classList.remove('border-brand-500', 'bg-brand-50/40');
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        handleImageFile(e.dataTransfer.files[0]);
+      }
+    }
+
+    function handleImageFile(file) {
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        document.getElementById('image-upload-prompt').classList.add('hidden');
+        const previewContainer = document.getElementById('image-preview-container');
+        const previewImg = document.getElementById('image-preview-element');
+        previewImg.src = e.target.result;
+        previewContainer.classList.remove('hidden');
+
+        // Automatically prefill simulated detection item based on filename or default
+        const cleanName = file.name.toLowerCase();
+        let matched = TEST_PRESETS.find(p => cleanName.includes(p.name.toLowerCase()) || cleanName.includes(p.id));
+        if (matched) {
+          document.getElementById('waste-text-input').value = matched.name;
+        } else {
+          document.getElementById('waste-text-input').value = "Image Scanned: " + file.name.replace(/\.[^/.]+$/, "");
+        }
+        showToast("Image loaded into browser memory");
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Run Preset by ID
+    function runPreset(presetId) {
+      const preset = TEST_PRESETS.find(p => p.id === presetId);
+      if (!preset) return;
+
+      document.getElementById('waste-text-input').value = preset.name;
+      executeAIWorkflow(preset);
+    }
+
+    // Trigger Analysis from input button or enter key
+    function triggerAnalysis() {
+      const inputVal = document.getElementById('waste-text-input').value.trim();
+      const previewImg = document.getElementById('image-preview-element');
+      const hasImage = !document.getElementById('image-preview-container').classList.contains('hidden');
+
+      if (!inputVal && !hasImage) {
+        showToast("Please enter an item name or upload an image first.");
+        return;
+      }
+
+      // Fuzzy matching across presets or create dynamic object
+      const clean = inputVal.toLowerCase();
+      let matched = TEST_PRESETS.find(p => 
+        clean.includes(p.name.toLowerCase()) || 
+        clean.includes(p.id.replace('_', ' ')) ||
+        (clean.includes('peel') && p.id === 'banana_peel') ||
+        (clean.includes('charger') && p.id === 'charger') ||
+        (clean.includes('wire') && p.id === 'charger') ||
+        (clean.includes('phone') && p.id === 'old_phone') ||
+        (clean.includes('bottle') && p.id === 'plastic_bottle') ||
+        (clean.includes('box') && p.id === 'cardboard') ||
+        (clean.includes('glass') && p.id === 'broken_glass') ||
+        (clean.includes('can') && p.id === 'can') ||
+        (clean.includes('battery') && p.id === 'battery') ||
+        (clean.includes('food') && p.id === 'food_leftovers')
+      );
+
+      if (matched) {
+        executeAIWorkflow(matched);
+      } else {
+        // Dynamic item classification with low confidence handling
+        const isUnknownOrVague = inputVal.length < 3 || clean.includes('thing') || clean.includes('stuff');
+        const dynamicItem = {
+          name: inputVal ? inputVal.slice(0, 35) : "Scanned Item",
+          category: isUnknownOrVague ? "General Waste" : "Recyclable Waste",
+          badgeClass: isUnknownOrVague ? "bg-slate-600 text-white" : "bg-blue-600 text-white",
+          recyclable: isUnknownOrVague ? "Uncertain (Inspect local guide)" : "Conditional",
+          reusable: "Check if intact for domestic reuse",
+          recommendation: "Separate from wet compost and verify with local municipal sanitation personnel.",
+          impact: "Proper segregation shields recycled batches from chemical or moisture contamination.",
+          safety: "Avoid sharp fragments and never burn unknown plastics.",
+          confidence: isUnknownOrVague ? 52 : 78,
+          explanation: isUnknownOrVague 
+            ? "Item attributes are ambiguous. In accordance with Responsible AI guidelines, low confidence triggers an explicit municipal verification notice."
+            : "Classified based on general solid waste heuristics. Check container labels for exact resin identification codes.",
+          isHazardous: false
+        };
+        executeAIWorkflow(dynamicItem);
+      }
+    }
+
+    // Execute Multi-Step Animated AI Pipeline
+    function executeAIWorkflow(item) {
+      // Toggle states
+      document.getElementById('state-empty').classList.add('hidden');
+      document.getElementById('state-result').classList.add('hidden');
+      document.getElementById('state-loading').classList.remove('hidden');
+
+      const statusText = document.getElementById('pipeline-status-text');
+      const step1 = document.getElementById('pipe-step-1');
+      const step2 = document.getElementById('pipe-step-2');
+      const step3 = document.getElementById('pipe-step-3');
+
+      // Reset step styles
+      step1.className = "flex items-center gap-2 text-slate-400";
+      step2.className = "flex items-center gap-2 text-slate-400";
+      step3.className = "flex items-center gap-2 text-slate-400";
+
+      // Step 1: Parsing
+      statusText.textContent = "Parsing and tokenizing item input...";
+      step1.className = "flex items-center gap-2 text-brand-600 font-semibold";
+      
+      setTimeout(() => {
+        // Step 2: Categorization
+        statusText.textContent = "Applying multi-class waste categorization model...";
+        step1.className = "flex items-center gap-2 text-brand-700";
+        step2.className = "flex items-center gap-2 text-brand-600 font-semibold";
+      }, 500);
+
+      setTimeout(() => {
+        // Step 3: Knowledge fetch
+        statusText.textContent = "Retrieving environmental safety and recycling rules...";
+        step2.className = "flex items-center gap-2 text-brand-700";
+        step3.className = "flex items-center gap-2 text-brand-600 font-semibold";
+      }, 1000);
+
+      setTimeout(() => {
+        // Step 4: Render results
+        displayResultCard(item);
+        incrementSimulatedStats(item.category);
+      }, 1500);
+    }
+
+    // Display AI Results in Result Card
+    function displayResultCard(item) {
+      document.getElementById('state-loading').classList.add('hidden');
+      document.getElementById('state-result').classList.remove('hidden');
+
+      // Populate fields
+      document.getElementById('res-item-name').textContent = item.name;
+      const catBadge = document.getElementById('res-category-badge');
+      catBadge.textContent = item.category;
+      catBadge.className = `px-3 py-1 rounded-full text-xs font-bold shadow-sm inline-flex items-center gap-1 ${item.badgeClass}`;
+
+      document.getElementById('res-confidence-text').textContent = `${item.confidence}%`;
+      const confBar = document.getElementById('res-confidence-bar');
+      confBar.style.width = `${item.confidence}%`;
+      if (item.confidence >= 80) {
+        confBar.className = "h-full bg-brand-500 rounded-full transition-all duration-700";
+      } else if (item.confidence >= 70) {
+        confBar.className = "h-full bg-amber-500 rounded-full transition-all duration-700";
+      } else {
+        confBar.className = "h-full bg-rose-500 rounded-full transition-all duration-700";
+      }
+
+      // Low confidence banner check (< 70%)
+      const lowConfBanner = document.getElementById('res-low-confidence-banner');
+      if (item.confidence < 70) {
+        lowConfBanner.classList.remove('hidden');
+      } else {
+        lowConfBanner.classList.add('hidden');
+      }
+
+      document.getElementById('res-recyclable').textContent = item.recyclable;
+      const reusableEl = document.getElementById('res-reusable');
+      reusableEl.textContent = item.reusable;
+      reusableEl.title = item.reusable;
+
+      document.getElementById('res-recommendation').textContent = item.recommendation;
+      document.getElementById('res-impact').textContent = item.impact;
+
+      // Safety warning container
+      const safetyBox = document.getElementById('res-safety-container');
+      const safetyText = document.getElementById('res-safety');
+      if (item.safety) {
+        safetyBox.classList.remove('hidden');
+        safetyText.textContent = item.safety;
+      } else {
+        safetyBox.classList.add('hidden');
+      }
+
+      document.getElementById('res-explanation').textContent = item.explanation;
+
+      lucide.createIcons();
+    }
+
+    // Toggle Explainable "Why" Section
+    function toggleWhySection() {
+      const p = document.getElementById('res-explanation');
+      const chev = document.getElementById('why-chevron');
+      if (p.classList.contains('hidden')) {
+        p.classList.remove('hidden');
+        chev.classList.remove('rotate-180');
+      } else {
+        p.classList.add('hidden');
+        chev.classList.add('rotate-180');
+      }
+    }
+
+    // Clear and Reset Inputs
+    function clearInputs() {
+      document.getElementById('waste-text-input').value = '';
+      document.getElementById('image-preview-container').classList.add('hidden');
+      document.getElementById('image-upload-prompt').classList.remove('hidden');
+      document.getElementById('image-file-input').value = '';
+      document.getElementById('state-result').classList.add('hidden');
+      document.getElementById('state-loading').classList.add('hidden');
+      document.getElementById('state-empty').classList.remove('hidden');
+      showToast("Analyzer reset to initial state");
+    }
+
+    // Simulated Eco Dashboard KPI state
+    let stats = {
+      total: 1428,
+      rec: 612,
+      org: 490,
+      ewaste: 184,
+      other: 142
+    };
+
+    function incrementSimulatedStats(category) {
+      stats.total += 1;
+      if (category.includes('Recyclable') || category.includes('Plastic')) stats.rec += 1;
+      else if (category.includes('Organic')) stats.org += 1;
+      else if (category.includes('E-Waste')) stats.ewaste += 1;
+      else stats.other += 1;
+      updateDashboardUI();
+    }
+
+    function simulateNewQuery() {
+      const sampleCats = ["Recyclable Waste", "Organic Waste", "E-Waste", "Hazardous Waste"];
+      const randomCat = sampleCats[Math.floor(Math.random() * sampleCats.length)];
+      incrementSimulatedStats(randomCat);
+      showToast("Simulated query added to prototype statistics");
+    }
+
+    function updateDashboardUI() {
+      document.getElementById('kpi-total').textContent = stats.total.toLocaleString();
+      document.getElementById('kpi-recyclable').textContent = stats.rec.toLocaleString();
+      document.getElementById('kpi-organic').textContent = stats.org.toLocaleString();
+      document.getElementById('kpi-ewaste').textContent = stats.ewaste.toLocaleString();
+      document.getElementById('kpi-other').textContent = stats.other.toLocaleString();
+
+      const pctRec = ((stats.rec / stats.total) * 100).toFixed(1);
+      const pctOrg = ((stats.org / stats.total) * 100).toFixed(1);
+      const pctEwaste = ((stats.ewaste / stats.total) * 100).toFixed(1);
+      const pctOther = ((stats.other / stats.total) * 100).toFixed(1);
+
+      document.getElementById('chart-pct-rec').textContent = `${pctRec}% (${stats.rec} items)`;
+      document.getElementById('chart-pct-org').textContent = `${pctOrg}% (${stats.org} items)`;
+      document.getElementById('chart-pct-ewaste').textContent = `${pctEwaste}% (${stats.ewaste} items)`;
+      document.getElementById('chart-pct-other').textContent = `${pctOther}% (${stats.other} items)`;
+
+      document.getElementById('bar-rec').style.width = `${pctRec}%`;
+      document.getElementById('bar-org').style.width = `${pctOrg}%`;
+      document.getElementById('bar-ewaste').style.width = `${pctEwaste}%`;
+      document.getElementById('bar-other').style.width = `${pctOther}%`;
+    }
+
+    // Modal Handlers
+    function openModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      lucide.createIcons();
+    }
+
+    function closeModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // Copy README Markdown to Clipboard
+    function copyReadmeText() {
+      const content = document.getElementById('readme-raw-content').innerText;
+      const textArea = document.createElement('textarea');
+      textArea.value = content;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        document.getElementById('copy-btn-text').textContent = "Copied to Clipboard!";
+        document.getElementById('modal-copy-btn-text').textContent = "Copied!";
+        showToast("README.md copied to clipboard");
+        setTimeout(() => {
+          document.getElementById('copy-btn-text').textContent = "Copy README Markdown";
+          document.getElementById('modal-copy-btn-text').textContent = "Copy Markdown";
+        }, 2500);
+      } catch (err) {
+        showToast("Please copy text manually");
+      }
+      document.body.removeChild(textArea);
+    }
+
+    // Toast message notification
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-message').textContent = msg;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 3000);
+    }
+  </script>
 </body>
 </html>
